@@ -1,0 +1,42 @@
+
+<ion-header>
+
+  <ion-navbar color="bright">
+    <ion-title> {{ category.name }} </ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+<!-- Floating Action Button for Cart -->
+<ion-fab right bottom padding no-border (click)="openCart()">
+    <button ion-fab color="danger">
+      <ion-icon name="cart"></ion-icon>
+    </button>
+  </ion-fab>
+  
+  <!-- Banner -->
+  <ion-card>
+  <ion-slides>
+    <ion-slide>
+        <img src="http://via.placeholder.com/400X80" />
+    </ion-slide>
+  </ion-slides>
+</ion-card>
+  <ion-list>
+    <ion-item *ngFor="let product of products" (click)="openProductPage(product)" text-wrap>
+      <ion-thumbnail item-left>
+          <img [src]="product.featured_src"/>
+      </ion-thumbnail>
+        <h2> {{ product.title }} </h2>
+        <h3>
+          <span [innerHTML]="product.short_description.substr(0, 50) + '...'"></span>
+          <span [innerHTML]="product.price_html"></span>
+        </h3>
+        <button ion-button icon clear item-right>
+          <ion-icon name="arrow-forward"></ion-icon>
+        </button>
+    </ion-item>
+  </ion-list>
+</ion-content>

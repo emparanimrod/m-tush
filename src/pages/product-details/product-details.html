@@ -1,0 +1,101 @@
+
+<ion-header no-border>
+
+  <ion-navbar color="bright">
+    <ion-title> {{ product.title }}  </ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<!-- images -->
+<ion-content>
+<!-- 
+Floating Action Button for Cart -->
+<ion-fab right bottom padding no-border (click)="openCart()">
+  <button ion-fab color="danger">
+    <ion-icon name="cart"></ion-icon>
+  </button>
+</ion-fab>
+
+<ion-card>
+<ion-slides pager autoplay="3000">
+  <ion-slide *ngFor="let image of product.images">
+    <img [src]="image.src"/>
+  </ion-slide>
+</ion-slides>
+ <!-- Description -->
+<ion-card-content padding>
+  <ion-card-title>
+    {{ product.title }} &nbsp;
+  </ion-card-title>
+  <p centre [innerHTML]="product.price_html"></p>
+  <ion-chip *ngFor="let cat of product.categories" style="margin-left: 5px" >
+      <ion-label color="bright"> {{ cat }} </ion-label>
+    </ion-chip>
+<!-- Add to Cart -->
+  <button ion-button icon-left block outline color="bright" padding (click)="addToCart(product)">
+    <ion-icon name="cart"></ion-icon> Add to Cart
+  </button>
+</ion-card-content>
+</ion-card>
+
+<!-- Lists Product Specifications -->
+<ion-card >
+  <ion-card-content>
+    <ion-card-title>Specifications</ion-card-title>
+    <ion-grid>
+      <ion-row *ngFor="let att of product.attributes">
+        <ion-col col-4>
+          {{ att.name }}
+        </ion-col>
+        <ion-col col-8>
+          <span *ngFor="let option of att.options"> {{ option }} &nbsp; </span>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card-content>
+</ion-card>
+<!-- description -->
+<ion-card>
+  <ion-card-content>
+    <ion-card-title>Description</ion-card-title>
+      <p [innerHTML]="product.description" text-wrap></p>
+  </ion-card-content>
+</ion-card>
+
+<!-- Reviews -->
+<ion-card>
+  <ion-card-content>
+    <ion-card-title>Reviews</ion-card-title>
+    <ion-grid>
+      <ion-row *ngFor="let review of reviews">
+        <ion-col col-4> 
+          <b>{{ review.reviewer_name }}</b><br/>
+          <!-- number of stars -->
+          <span *ngIf="review.rating >= 1">
+            <ion-icon style="color: gold" small name="star"></ion-icon>
+          </span>
+          <span *ngIf="review.rating >= 2">
+              <ion-icon style="color: gold" small name="star"></ion-icon>
+            </span>
+            <span *ngIf="review.rating >= 3">
+                <ion-icon style="color: gold" small name="star"></ion-icon>
+              </span>
+              <span *ngIf="review.rating >= 4">
+                  <ion-icon style="color: gold" small name="star"></ion-icon>
+                </span>
+                <span *ngIf="review.rating >= 5">
+                    <ion-icon style="color: gold" small name="star"></ion-icon>
+                  </span>
+        </ion-col>
+        <ion-col col-8>
+          {{ review.review }}
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card-content>
+</ion-card>
+
+</ion-content>
+
+<!-- *ngIf="product.attributes.length  >0" -->

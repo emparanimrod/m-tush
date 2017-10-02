@@ -1,0 +1,41 @@
+<ion-menu [content]="content" reveal>
+  <ion-header no-padding>
+    <ion-toolbar color="bright">
+      <!-- <ion-slides>
+      <ion-slide no-padding> -->
+        <img src="http://via.placeholder.com/300x200" no-padding no-border/>
+      <!-- </ion-slide> -->
+    <!-- </ion-slides> -->
+      <ion-title>Menu</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+    <button ion-button clear (click)="openHomePage('home')">Home</button>
+    <ion-item (click)="openPage('signup')">
+      <h2>Sign Up</h2>
+    </ion-item>
+   <!-- Login -->
+    <ion-item (click)="openPage('login')">
+      <h2>Login</h2>
+    </ion-item>
+    <ion-list>
+      <ion-item>
+      <h2>Categories</h2>
+      <ion-item *ngFor="let category of categories" (click)="openCategoryPage(category)" >
+        <h2> {{ category.name }} </h2>
+        <p>{{ category.description }} </p>
+      </ion-item>
+    <ion-item (click)="openPage('signup')">
+      <h2>Sign Up</h2>
+    </ion-item>
+   <!-- Login -->
+    <ion-item (click)="openPage('login')">
+      <h2>Login</h2>
+    </ion-item>
+  </ion-item>
+  </ion-list>
+  </ion-content>
+
+</ion-menu>
+<ion-nav #content [root]="homePage"></ion-nav>

@@ -1,0 +1,22 @@
+page-cart {
+ 
+    ion-slides {
+        opacity: 0.5;
+    }
+
+    ion-item {
+        margin: 0px !important;;
+        padding: 5px !important;;
+    }
+    img {
+        width: 66px !important;;
+        height: 66px !important;;
+        border-top-left-radius: 50% 50%;
+        border-top-right-radius: 50% 50%;
+        border-bottom-right-radius: 50% 50%;
+        border-bottom-left-radius: 50% 50%;
+    }
+    b {
+        text-align: left !important;;
+    }
+}

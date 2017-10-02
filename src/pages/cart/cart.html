@@ -1,0 +1,72 @@
+
+<ion-header>
+
+  <ion-navbar color="bright">
+    <ion-title style="text-align: center">Cart</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+<!-- Shows up only when cart is empty -->
+<!-- <ion-slides [hidden]="showEmptyCartMessage">
+  <ion-slide>
+    <ion-icon large name="cart" ></ion-icon>
+    <h2>Your Cart is Empty</h2>
+  </ion-slide>
+</ion-slides> -->
+<!-- <ion-card>
+  <ion-grid>
+    <ion-row>
+      <ion-col>Your Cart</ion-col>
+    </ion-row>
+    <ion-row [hidden]="!showEmptyCartMessage">
+      <ion-col>Your Cart is Empty</ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-card> -->
+
+  <ion-list>
+    <ion-item *ngFor="let item of cartItems; let i = index">
+
+      <ion-thumbnail item-left>
+        <img [src]="item.product.featured_src">
+      </ion-thumbnail>
+
+      <h2> {{ item.product.title }} </h2>
+
+      <p> Quantity: <b> {{ item.qty }} </b> </p>
+      <p> Price: <b>{{ item.product.price }}</b> </p>
+
+      <button ion-button clear large item-right color="danger" (click)="removeFromCart(item, i)">
+        <ion-icon name="close-circle" medium></ion-icon>
+      </button>
+    </ion-item>
+  </ion-list>
+
+  <ion-footer>
+    <ion-toolbar>
+      <ion-grid>
+        <ion-row>
+            <ion-col col-4 style="text-align: left">
+               <b>TOTAL</b>
+            </ion-col>
+            <ion-col col-8 style="text-align: right">
+              <b> KSHS {{ total }} </b> 
+            </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-5 color="green">
+            <button ion-button  style="text-align: centre" block (click)="checkout()">Check Out</button>
+          </ion-col>
+          <ion-col col-7>
+            <button ion-button color="bright" block style="text-align: left" (click)="closeModal()">Continue Shopping</button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-toolbar>
+  </ion-footer>
+
+</ion-content>

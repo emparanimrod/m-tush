@@ -1,0 +1,89 @@
+<ion-header no-border>
+  <ion-navbar color="bright">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Home</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <!-- Floating Action Button for Cart -->
+<ion-fab right bottom padding no-border (click)="openCart()">
+    <button ion-fab color="danger">
+      <ion-icon name="cart"></ion-icon>
+    </button>
+  </ion-fab>
+
+  <!-- Top Banner -->
+  <ion-card no-shadow>
+  <ion-slides autoplay="3000" pager>
+    <ion-slide>
+      <img src="http://via.placeholder.com/400X120" />
+    </ion-slide>
+    <ion-slide>
+        <img src="http://via.placeholder.com/400X120" />
+    </ion-slide>
+    <ion-slide>
+        <img src="http://via.placeholder.com/400X120" />
+    </ion-slide>
+    <ion-slide>
+        <img src="http://via.placeholder.com/400X120" />
+    </ion-slide>
+  </ion-slides>
+</ion-card>
+
+  <!-- Unedited Slider -->
+
+<ion-grid no-padding>
+  <ion-row>
+    <ion-slides pager>
+      <ion-slide no-padding *ngFor="let product of products" >
+        <ion-card no-padding (click)="openProductPage(product)">
+          <img [src]="product.featured_src"/>
+          <h2 padding centre> <b>{{ product.title }}</b> </h2>
+          <h5 padding style="margin-bottom:15px" centre [innerHTML]="product.price_html"></h5>
+        </ion-card>
+      </ion-slide>
+    </ion-slides>
+  </ion-row>
+</ion-grid>
+
+
+<!-- <ion-refresher (ionRefresh)="loadMoreProducts($event)" >
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher> -->
+
+
+<ion-list>
+  <ion-item *ngFor="let product of moreProducts" text-wrap (click)="openProductPage(product)">
+    <ion-thumbnail item-left>
+        <img [src]="product.featured_src"/>
+    </ion-thumbnail>
+      <h2> {{ product.title }} </h2>
+      <h3>
+        <span [innerHTML]="product.short_description.substr(0, 50) + '...'"></span>
+        <span [innerHTML]="product.price_html"></span>
+      </h3>
+      <button ion-button icon clear item-right>
+        <ion-icon name="arrow-forward"></ion-icon>
+      </button>
+  </ion-item>
+</ion-list>
+
+<ion-grid>
+  <ion-row *ngFor="let row of grid">
+
+  </ion-row>
+</ion-grid>
+
+<ion-infinite-scroll (ionInfinite)="loadMoreProducts($event)">
+  <ion-infinite-scroll-content></ion-infinite-scroll-content>
+</ion-infinite-scroll>
+
+</ion-content>
