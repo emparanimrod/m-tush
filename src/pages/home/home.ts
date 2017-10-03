@@ -3,6 +3,7 @@ import { NavController,  ToastController, ModalController } from 'ionic-angular'
 import * as WC from 'woocommerce-api';
 import { ProductDetailsPage } from '../product-details/product-details';
 import { CartPage } from '../cart/cart';
+import { ProductsByCategoryPage } from '../products-by-category/products-by-category';
 // import { WC_URL } from "../../models/appconfig";
 
 @Component({
@@ -11,16 +12,34 @@ import { CartPage } from '../cart/cart';
 })
 export class HomePage {
 
+  // list slides for slider
+  public slides = [
+    {
+      src: 'assets/img/slide_1.jpg'
+    },
+    {
+      src: 'assets/img/slide_2.jpg'
+    },
+    {
+      src: 'assets/img/slide_3.jpg'
+    }
+  ];
+
+  //constants
+
  WooCommerce: any; 
   products: any[];
   page: number;
   moreProducts: any[];
+  categories: any[];
+  
  
   // @ViewChild('productslides') productSlides: Slides;
   constructor(public navCtrl: NavController, 
               public toastCtrl: ToastController,
               public modalCtrl: ModalController) {
 
+                this.categories = [];
     // this.page = 2;
     // this.WooCommerce = WC ({
     //   WC_URL
@@ -44,6 +63,21 @@ export class HomePage {
    }, (err) =>{
     console.log(err)
    });
+
+   this.WooCommerce.getAsync('products/categories').then((data) =>{
+    console.log(JSON.parse(data.body).product_categories);
+
+    let temp: any[] = JSON.parse(data.body).product_categories;
+
+    for( let i = 0; i < temp.length; i ++ ){
+      if(temp[i].parent == 0){
+        this.categories.push(temp[i]);
+      }
+    }
+
+  }, (err) => {
+    console.log(err)
+  });
   }
 
   ionViewDidLoad(){
@@ -58,7 +92,7 @@ export class HomePage {
 
     if(event == null)
       {
-        this.page = 2;
+        this.page = 1;
       this.moreProducts = [];
     }
       else
@@ -83,6 +117,22 @@ export class HomePage {
      }, (err) =>{
       console.log(err)
      })
+ 
+    //  categories
+     this.WooCommerce.getAsync('products/categories').then((data) =>{
+      console.log(JSON.parse(data.body).product_categories);
+  
+      let temp: any[] = JSON.parse(data.body).product_categories;
+  
+      for( let i = 0; i < temp.length; i ++ ){
+        if(temp[i].parent == 0){
+          this.categories.push(temp[i]);
+        }
+      }
+  
+    }, (err) => {
+      console.log(err)
+    })
 
   }
   openCart(){
@@ -93,5 +143,11 @@ export class HomePage {
 
     this.navCtrl.push(ProductDetailsPage, {"product": product})
   }
+
+  openCategoryPage(category){
+    
+        this.navCtrl.push(ProductsByCategoryPage, {'category': category});
+    
+      }
 
 }

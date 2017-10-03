@@ -1,10 +1,23 @@
 <ion-header no-border>
-  <ion-navbar color="bright">
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>Home</ion-title>
-  </ion-navbar>
+
+    <ion-navbar color="primary">
+        <button ion-button menuToggle>
+          <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>Home</ion-title>
+        <ion-buttons end>
+          <button ion-button (click)="goToSearch()">
+            <ion-icon large name="search"></ion-icon>
+          </button>
+          <!-- <button ion-button>
+            <ion-icon name="qr-scanner"></ion-icon>
+          </button> -->
+          <button ion-button (click)="openCart()">
+            <ion-icon name="cart"></ion-icon>
+          </button>
+        </ion-buttons>
+      </ion-navbar>
+
 </ion-header>
 
 <ion-content>
@@ -15,27 +28,67 @@
     </button>
   </ion-fab>
 
+  <ion-slides pager autoplay="2000">
+      
+          <ion-slide *ngFor="let slide of slides">
+            <img src="{{ slide.src }}" alt="">
+          </ion-slide>
+      
+        </ion-slides>
+
   <!-- Top Banner -->
-  <ion-card no-shadow>
+  <!-- <ion-card no-shadow>
   <ion-slides autoplay="3000" pager>
     <ion-slide>
-      <img src="http://via.placeholder.com/400X120" />
+      <img src="http://via.placeholder.com/400X200" />
     </ion-slide>
     <ion-slide>
-        <img src="http://via.placeholder.com/400X120" />
+        <img src="http://via.placeholder.com/400X200" />
     </ion-slide>
     <ion-slide>
-        <img src="http://via.placeholder.com/400X120" />
+        <img src="http://via.placeholder.com/400X200" />
     </ion-slide>
     <ion-slide>
-        <img src="http://via.placeholder.com/400X120" />
+        <img src="http://via.placeholder.com/400X200" />
     </ion-slide>
   </ion-slides>
-</ion-card>
+</ion-card> -->
+
+
+  <!--list categories-->
+  <ion-card>
+      <ion-list class="cat-list">
+        <ion-row>
+          <ion-col *ngFor="let category of categories | slice:0:3; let i = index" (click)="openCategoryPage(category)">
+            <ion-thumbnail>
+                <img style="height: 66px" src="{{ category.image }}">
+            </ion-thumbnail>
+            <div text-center>{{ category.name }}</div>
+          </ion-col>
+          <ion-col text-center (click)="viewCategories()">
+            <img center style="height: 60px; "src="assets/img/categories/all.png" />
+            <div text-center>All categories</div>
+          </ion-col>
+        </ion-row>
+      </ion-list>
+    </ion-card>
+
+ <!--List of items-->
+ <ion-grid class="list-cards">
+    <ion-row>
+      <ion-col *ngFor="let product of products" col-6 class="product" (click)="openProductPage(product)">
+        <div class="card light-bg">
+          <img src="{{ product.featured_src }}" alt="{{ product.title }}">
+          <div class="price" text-center [innerHTML]="product.price_html"></div>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
 
   <!-- Unedited Slider -->
 
-<ion-grid no-padding>
+<!-- <ion-grid no-padding>
   <ion-row>
     <ion-slides pager>
       <ion-slide no-padding *ngFor="let product of products" >
@@ -47,7 +100,7 @@
       </ion-slide>
     </ion-slides>
   </ion-row>
-</ion-grid>
+</ion-grid> -->
 
 
 <!-- <ion-refresher (ionRefresh)="loadMoreProducts($event)" >
@@ -59,7 +112,7 @@
     </ion-refresher-content>
   </ion-refresher> -->
 
-
+<!-- initial list
 <ion-list>
   <ion-item *ngFor="let product of moreProducts" text-wrap (click)="openProductPage(product)">
     <ion-thumbnail item-left>
@@ -74,16 +127,11 @@
         <ion-icon name="arrow-forward"></ion-icon>
       </button>
   </ion-item>
-</ion-list>
+</ion-list> -->
 
-<ion-grid>
-  <ion-row *ngFor="let row of grid">
 
-  </ion-row>
-</ion-grid>
-
-<ion-infinite-scroll (ionInfinite)="loadMoreProducts($event)">
+<!-- <ion-infinite-scroll (ionInfinite)="loadMoreProducts($event)">
   <ion-infinite-scroll-content></ion-infinite-scroll-content>
-</ion-infinite-scroll>
+</ion-infinite-scroll> -->
 
 </ion-content>
