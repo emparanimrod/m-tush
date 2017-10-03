@@ -3,7 +3,7 @@ import { NavController,  ToastController, ModalController } from 'ionic-angular'
 import * as WC from 'woocommerce-api';
 import { ProductDetailsPage } from '../product-details/product-details';
 import { CartPage } from '../cart/cart';
-import { WC_URL } from "../../models/appconfig";
+// import { WC_URL } from "../../models/appconfig";
 
 @Component({
   selector: 'page-home',

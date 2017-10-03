@@ -8,6 +8,7 @@ import { HomePage } from '../pages/home/home';
 import { Menu } from '../pages/menu/menu';
 import { ProductsByCategoryPage } from "../pages/products-by-category/products-by-category";
 import { ProductDetailsPage } from "../pages/product-details/product-details";
+import { HttpModule } from "@angular/http";
 // import * as WC from "woocommerce-api";
 // import { WC_URL } from "../models/appconfig";
 
@@ -32,6 +33,7 @@ import { CheckoutPage } from '../pages/checkout/checkout';
   ],
   imports: [
     BrowserModule,
+    HttpModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot()
 

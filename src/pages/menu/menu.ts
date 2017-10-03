@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, ModalController } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { ProductsByCategoryPage } from "../products-by-category/products-by-category";
 import * as WC from 'woocommerce-api';
 import { SignupPage } from '../signup/signup';
 import { LoginPage } from '../login/login';
+import { Storage } from "@ionic/storage";
+import { CartPage } from '../cart/cart';
 
 @Component({
   selector: 'page-menu',
@@ -14,12 +16,18 @@ export class Menu {
   homePage: Component;
   WooCommerce: any;
   categories: any[];
+  loggedIn: boolean;
+  user: any
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, 
+              public navParams: NavParams,
+              public storage: Storage,
+              public modalCtrl: ModalController ) {
   
     this.homePage = HomePage;
     this.categories = [];
+    this.user = {};
     
   
   this.WooCommerce = WC({
@@ -48,9 +56,32 @@ export class Menu {
     console.log(err)
   })
   }
-  // ionViewDidLoad() {
-  //   console.log('ionViewDidLoad Menu');
-  // };
+
+  ionViewDidEnter() {
+    
+    this.storage.ready().then( () => {
+      this.storage.get("userLoginInfo").then( (userLoginInfo) =>{
+
+        if(userLoginInfo != null){
+
+          console.log("user logged in");
+          this.user = userLoginInfo.user;
+          console.log(this.user);
+          this.loggedIn = true;
+
+        } else {
+
+          console.log("No user is logged in");
+          this.user = {};
+          this.loggedIn = false;
+        }
+
+      } )
+    })
+
+
+  };
+
   openCategoryPage(category){
 
     this.navCtrl.push(ProductsByCategoryPage, {'category': category});
@@ -62,6 +93,16 @@ openPage(pageName: string){
   }
   if(pageName == "login"){
     this.navCtrl.push(LoginPage);
+  }
+  if(pageName == "cart"){
+    let modal = this.modalCtrl.create(CartPage);
+    modal.present();
+  }
+  if(pageName == "logout"){
+    this.storage.remove("userLoginInfo").then( () => {
+      this.user = {};
+      this.loggedIn = false;
+    })
   }
 }
 openHomePage(pageName: string){

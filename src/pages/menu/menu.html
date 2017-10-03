@@ -11,12 +11,24 @@
   </ion-header>
 
   <ion-content>
+<!-- user info -->
+<ion-item *ngIf="loggedIn">
+  <ion-icon name="contact" item-left large></ion-icon>
+  <h2> {{ (this.user.firstname == '' ? this.user.username : this.user.firstname) || "" }} </h2>
+</ion-item>
+
+<ion-item *ngIf="loggedIn" (click)="openPage('cart')">
+  <ion-icon name="cart" item-left large></ion-icon>
+  <h2>Your Cart</h2>
+</ion-item>
+
+
     <button ion-button clear (click)="openHomePage('home')">Home</button>
-    <ion-item (click)="openPage('signup')">
+    <ion-item (click)="openPage('signup')" menu-close *ngIf="!loggedIn">
       <h2>Sign Up</h2>
     </ion-item>
    <!-- Login -->
-    <ion-item (click)="openPage('login')">
+    <ion-item (click)="openPage('login')" menu-close *ngIf="!loggedIn" >
       <h2>Login</h2>
     </ion-item>
     <ion-list>
@@ -26,15 +38,12 @@
         <h2> {{ category.name }} </h2>
         <p>{{ category.description }} </p>
       </ion-item>
-    <ion-item (click)="openPage('signup')">
-      <h2>Sign Up</h2>
-    </ion-item>
-   <!-- Login -->
-    <ion-item (click)="openPage('login')">
-      <h2>Login</h2>
-    </ion-item>
   </ion-item>
   </ion-list>
+<ion-item *ngIf="loggedIn" (click)="openPage('logout')" >
+  <ion-icon name="log-out" item-left large></ion-icon>
+  <h2>Logout</h2>
+</ion-item>
   </ion-content>
 
 </ion-menu>
