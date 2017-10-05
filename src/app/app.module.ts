@@ -18,6 +18,10 @@ import { CartPage } from '../pages/cart/cart';
 import { SignupPage } from '../pages/signup/signup';
 import { LoginPage } from '../pages/login/login';
 import { CheckoutPage } from '../pages/checkout/checkout';
+import { CategoriesPage } from '../pages/categories/categories';
+import { OrdersPage } from '../pages/orders/orders';
+import { ProfilePage } from '../pages/profile/profile';
+import { SettingsPage } from '../pages/settings/settings';
 
 @NgModule({
   declarations: [
@@ -29,7 +33,11 @@ import { CheckoutPage } from '../pages/checkout/checkout';
     CartPage,
     SignupPage, 
     LoginPage,
-    CheckoutPage
+    CheckoutPage,
+    CategoriesPage,
+    OrdersPage,
+    ProfilePage,
+    SettingsPage
   ],
   imports: [
     BrowserModule,
@@ -48,7 +56,11 @@ import { CheckoutPage } from '../pages/checkout/checkout';
     CartPage,
     SignupPage, 
     LoginPage,
-    CheckoutPage
+    CheckoutPage,
+    CategoriesPage,
+    OrdersPage,
+    ProfilePage,
+    SettingsPage
   ],
   providers: [
     StatusBar,

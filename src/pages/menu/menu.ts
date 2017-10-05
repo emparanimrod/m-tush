@@ -7,6 +7,10 @@ import { SignupPage } from '../signup/signup';
 import { LoginPage } from '../login/login';
 import { Storage } from "@ionic/storage";
 import { CartPage } from '../cart/cart';
+import { CategoriesPage } from '../categories/categories';
+import { OrdersPage } from '../orders/orders';
+import { ProfilePage } from '../profile/profile';
+import { SettingsPage } from '../settings/settings';
 
 @Component({
   selector: 'page-menu',
@@ -80,7 +84,7 @@ export class Menu {
     })
 
 
-  };
+  }
 
   openCategoryPage(category){
 
@@ -93,6 +97,18 @@ openPage(pageName: string){
   }
   if(pageName == "login"){
     this.navCtrl.push(LoginPage);
+  }
+  if(pageName == "categories"){
+    this.navCtrl.push(CategoriesPage);
+  }
+  if(pageName == "orders"){
+    this.navCtrl.push(OrdersPage);
+  }
+  if(pageName == "profile"){
+    this.navCtrl.push(ProfilePage);
+  }
+  if(pageName == "settings"){
+    this.navCtrl.push(SettingsPage);
   }
   if(pageName == "cart"){
     let modal = this.modalCtrl.create(CartPage);
@@ -109,5 +125,8 @@ openHomePage(pageName: string){
   if(pageName == "home"){
     this.navCtrl.push(HomePage);
   }
+}
+openCart(){
+  this.modalCtrl.create(CartPage).present();
 }
 }

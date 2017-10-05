@@ -4,6 +4,7 @@ import * as WC from 'woocommerce-api';
 import { ProductDetailsPage } from '../product-details/product-details';
 import { CartPage } from '../cart/cart';
 import { ProductsByCategoryPage } from '../products-by-category/products-by-category';
+import { CategoriesPage } from '../categories/categories';
 // import { WC_URL } from "../../models/appconfig";
 
 @Component({
@@ -148,6 +149,11 @@ export class HomePage {
     
         this.navCtrl.push(ProductsByCategoryPage, {'category': category});
     
+      }
+      viewCategories(){
+
+        this.navCtrl.push(CategoriesPage);
+
       }
 
 }

@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ModalController } from 'ionic-angular';
+import { NavController, NavParams, ModalController, ToastController } from 'ionic-angular';
 import * as WC from 'woocommerce-api';
-// import { WC_URL } from "../../models/appconfig";
 import { CartPage } from '../cart/cart';
+import { Storage } from "@ionic/storage";
 import { ProductDetailsPage } from '../product-details/product-details';
 
 
@@ -12,48 +12,113 @@ import { ProductDetailsPage } from '../product-details/product-details';
 })
 export class ProductsByCategoryPage {
 
+  // view type
+  public viewType = 'list';
+  
   WooCommerce: any;
   products: any[];
   page: number;
   category: any;
+  moreProducts: any[];
 
   constructor(public navCtrl: NavController, 
               public navParams: NavParams, 
-              public modalCtrl: ModalController ) {
+              public modalCtrl: ModalController,
+              public storage: Storage,
+              public toastCtrl: ToastController, ) {
 
     this.page = 1;
     this.category = this.navParams.get("category");
+    
 
     this.WooCommerce = WC({
       url: 'https://cloud.edgetech.co.ke/m-tush',
       consumerKey: 'ck_3106173da4bf0f0269cd58e8be438139dc515b87',
       consumerSecret: 'cs_ee6a004c51a4206d4d9a374b1b05adac24927f53',
       version: 'v3',
-      // wpAPI: false,
-      // version: 'wc/v1',
       verifySsl: false,
       queryStringAuth: true
     });
+    
 
     this.WooCommerce.getAsync("products?filter[category]="+ this.category.slug).then( (data) => {
       console.log(JSON.parse(data.body));
       this.products = JSON.parse(data.body).products;
      }, (err) =>{
-      console.log(err)
-     })
+      console.log(err);
+     });
 
 
   }
 
+  viewList() {
+    this.viewType = 'list';
+  }
+
+  // swith to grid view
+  viewGrid() {
+    this.viewType = 'grid';
+  }
+
   openProductPage(product){
     
-        this.navCtrl.push(ProductDetailsPage, {"product": product})
-      }
-    
+        this.navCtrl.push(ProductDetailsPage, {"product": product});
 
-  // ionViewDidLoad() {
-  //   console.log('ionViewDidLoad ProductsByCategoryPage');
-  // }
+      }
+
+   addToCart(product){
+
+    this.storage.get("cart").then((data)=> {
+      // console.log(data);
+      //cart module
+      if(data == null || data.length == 0){
+
+        data = [];
+
+        data.push({
+          "product": product,
+          "qty": 1,
+          "amount": parseFloat(product.price)
+        });
+      } else {
+
+        let added = 0;
+
+        for(let i = 0; i < data.length; i++){
+          if(product.id == data[i].product.id){
+            console.log("Product is already in the cart");
+
+            let qty = data[i].qty;
+
+            data[i].qty = qty+1;
+            data[i].amount = parseFloat(data[i].amount) + parseFloat(data[i].product.price);
+            added = 1;
+          }
+        }
+        if(added == 0){
+          data.push({
+            "product": product,
+            "qty": 1,
+            "amount": parseFloat(product.price)
+          });
+        }
+      }
+
+      this.storage.set("cart", data).then( ()=>{
+
+        console.log("cart updated");
+        console.log(data);
+
+        this.toastCtrl.create({
+          message: "Your Cart has been Updated",
+          duration: 3000
+        }).present();
+
+      })
+
+    })
+  }
+    
   openCart(){
     this.modalCtrl.create(CartPage).present();
   }

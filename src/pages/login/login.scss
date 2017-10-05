@@ -1,5 +1,12 @@
-page-login {
-    ion-title {
-        text-align: centre !important;;
+page-login,
+.login {
+
+    ion-item {
+        margin-top: 40px !important
+    }
+}
+.bold {
+    div {
+        font-weight: heavy;;
     }
 }
