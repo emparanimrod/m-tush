@@ -13,6 +13,7 @@ export class CartPage {
   cartItems: any[] = [];
   total: any;
   showEmptyCartMessage: boolean = false;
+  
 
 
   constructor(public navCtrl: NavController, 
@@ -31,7 +32,8 @@ export class CartPage {
                     if(this.cartItems.length > 0){
                       this.cartItems.forEach( (item, index)=>{
                         this.total = this.total + (item.product.price * item.qty)
-                      })
+                      });
+                      console.log(data);
                     } else {
 
                       this.showEmptyCartMessage = true;
@@ -65,6 +67,69 @@ export class CartPage {
       this.showEmptyCartMessage = true;
     }
 
+  }
+
+  //add product quantity
+
+  addQuantity(item, i){
+    let price = item.product.price;
+    let qty = item.qty;
+    
+    this.storage.get("cart").then((data)=> {
+      
+           data[i].qty = qty+1;
+     
+        //    if( item.qty == 0){
+             
+        //        this.cartItems.splice(i.qty, 1);
+                     
+        //            }
+     
+        //  item.qty = qty;
+        //  console.log(item.qty);
+         });
+
+    
+    this.storage.set("cart", this.cartItems).then( () => {
+      
+            this.total = this.total + (price * qty);
+            console.log(item);
+      
+          });
+  }
+
+  reduceQuantity(item, i){
+    // let price = item.product.price;
+    // let qty = item.qty;
+
+
+
+
+
+
+    // this.storage.get("cart").then((data)=> {
+
+     
+    //   data[i].qty = qty-1;
+
+    //   if( item.qty == 0){
+        
+    //       this.cartItems.splice(i, 1);
+                
+    //           }
+
+    // item.qty = qty;
+    // console.log(item.qty);
+    // });
+
+    // this.storage.set("cart", this.cartItems).then( () => {
+      
+    //         this.total = this.total - (price * qty);
+      
+    //       });
+  
+
+    
   }
 
   checkout(){

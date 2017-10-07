@@ -1,29 +1,19 @@
 <ion-menu [content]="content">
-  <!-- <ion-header no-padding>
-    <ion-toolbar color="bright"> -->
-      <!-- <ion-slides>
-      <ion-slide no-padding> -->
-        <!-- <img src="http://via.placeholder.com/300x200" no-padding no-border/> -->
-      <!-- </ion-slide> -->
-    <!-- </ion-slides> -->
-      <!-- <ion-title>Menu</ion-title>
-    </ion-toolbar>
-  </ion-header> -->
-
-  <ion-content class="menu-left">
-<!-- user profile -->
+  <ion-header no-padding>
+    <!-- user profile -->
 <div padding class="menu-left menu-bg">
-    <a menuClose>
-      <img class="profile-picture" src="assets/img/user/profile.jpg">
-      <h4 *ngIf="loggedIn" ion-text color="light"> {{ (this.user.firstname == '' ? this.user.username : this.user.firstname) || "" }} </h4>
-      <h4 *ngIf="!loggedIn" ion-text color="light"> Welcome </h4>
-    </a>
-  </div>
+  <a menuClose>
+    <img class="profile-picture" src="assets/img/user/profile.jpg">
+    <h4 *ngIf="loggedIn" ion-text color="light"> {{ (this.user.firstname == '' ? this.user.username : this.user.firstname) || "" }} </h4>
+    <h4 *ngIf="!loggedIn" ion-text color="light"> Welcome </h4>
+  </a>
+</div>
+</ion-header>
+
+<ion-content class="menu-left">
 
 <ion-list class="list-full-border">
-
 <!-- home -->
-
   <button ion-item menuClose (click)="openHomePage('home')">
     <ion-icon item-left name="home"></ion-icon>
     Home
@@ -33,30 +23,27 @@
   <button ion-item menuClose *ngIf="!loggedIn" (click)="openPage('signup')">
       <ion-icon item-left name="person-add"></ion-icon>
       Sign Up
-    </button>
+  </button>
 
-    <!-- Sign up -->
+    <!-- Sign In -->
     <button ion-item menuClose *ngIf="!loggedIn" (click)="openPage('login')">
         <ion-icon item-left name="log-in"></ion-icon>
         Log-In
       </button>
-  <!-- categories -->
 
+  <!-- categories -->
   <button ion-item menuClose (click)="openPage('categories')">
       <ion-icon item-left name="list"></ion-icon>
       Categories
     </button>
 <!-- orders -->
-<button ion-item menuClose *ngIf="loggedIn" (click)="openPage('profile')">
-    <button ion-item menuClose  (click)="openPage('orders')">
+    <button ion-item menuClose *ngIf="loggedIn" (click)="openPage('orders')">
         <ion-icon item-left name="timer"></ion-icon>
         My Orders
 </button>
 
 <!-- cart -->
-
-<button ion-item menuClose *ngIf="loggedIn" (click)="openPage('profile')">
-    <button ion-item menuClose  (click)="openCart()">
+    <button ion-item menuClose *ngIf="loggedIn" (click)="openCart()">
     <ion-icon item-left name="cart"></ion-icon>
     My Cart
 </button>
@@ -77,11 +64,12 @@
 
 <button ion-item *ngIf="loggedIn" menuClose (click)="openPage('logout')">
     <ion-icon item-left name="log-out"></ion-icon>
-    LogOut
+    Logout
 </button>
+
 </ion-list>
 
-  </ion-content>
 
+</ion-content>
 </ion-menu>
 <ion-nav #content [root]="homePage"></ion-nav>

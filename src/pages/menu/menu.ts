@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ModalController } from 'ionic-angular';
+import { NavController, NavParams, ModalController, ToastController, AlertController } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { ProductsByCategoryPage } from "../products-by-category/products-by-category";
 import * as WC from 'woocommerce-api';
@@ -27,7 +27,9 @@ export class Menu {
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
               public storage: Storage,
-              public modalCtrl: ModalController ) {
+              public modalCtrl: ModalController,
+              public toastCtrl: ToastController,
+               public alertCtrl: AlertController ) {
   
     this.homePage = HomePage;
     this.categories = [];
@@ -118,6 +120,20 @@ openPage(pageName: string){
     this.storage.remove("userLoginInfo").then( () => {
       this.user = {};
       this.loggedIn = false;
+
+      // this.toastCtrl.create({
+      //   message: "You have successfully logged out",
+      //   duration: 4000
+
+      // }).present();
+
+      this.alertCtrl.create({
+        title: "Success!!", 
+        message: "You have been Successfully Logged Out",
+        buttons: ['Dismiss']
+
+      }).present();
+
     })
   }
 }
