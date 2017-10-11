@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, LoadingController } from 'ionic-angular';
 import * as WC from 'woocommerce-api';
 import { ProductsByCategoryPage } from '../products-by-category/products-by-category';
 
@@ -13,7 +13,9 @@ export class CategoriesPage {
   WooCommerce: any;
   categories: any[];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, 
+              public navParams: NavParams, 
+              public loadingCtrl: LoadingController) {
 
     this.categories = [];
 
@@ -29,32 +31,43 @@ export class CategoriesPage {
       queryStringAuth: true
     });
 
-    //categories
-  
+    let loading = this.loadingCtrl.create({
+      spinner: 'bubbles',
+      showBackdrop: false,
+      cssClass: 'backdrop'
+      });
+  loading.present();
+
     this.WooCommerce.getAsync('products/categories').then((data) =>{
       console.log(JSON.parse(data.body).product_categories);
-  
       let temp: any[] = JSON.parse(data.body).product_categories;
   
       for( let i = 0; i < temp.length; i ++ ){
         if(temp[i].parent == 0){
           this.categories.push(temp[i]);
+
+          loading.dismiss();
+  
         }
       }
-  
-    }, (err) => {
-      console.log(err)
-    })
-  }
+    
+  })
+
+}
 
   openCategoryPage(category){
+
+
     
         this.navCtrl.push(ProductsByCategoryPage, {'category': category});
     
       }
 
-  // ionViewDidLoad() {
-  //   console.log('ionViewDidLoad CategoriesPage');
-  // }
+
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad CategoriesPage');
+
+      
+  }
 
 }

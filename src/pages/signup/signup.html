@@ -48,7 +48,7 @@
         <ion-input type="password" [(ngModel)]="newUser.confirm_password"></ion-input>
       </ion-item>
       <!-- Billing Details -->
-  <ion-item-divider color="white">Billing Details</ion-item-divider>
+  <!-- <ion-item-divider color="white">Billing Details</ion-item-divider>
     <ion-item>
       <ion-label floating>Address 2</ion-label>
       <ion-textarea type="text" max Length="80" [(ngModel)]="newUser.billing_address.address_1"></ion-textarea>
@@ -93,11 +93,11 @@
     <ion-item>
       <ion-label>Would you like to use the same shipping details?</ion-label>
       <ion-checkbox (ionChange)="setBillingToShipping()"></ion-checkbox>
-    </ion-item>
+    </ion-item> -->
 
     <!-- Shipping Details -->
 
-    <ion-item-divider color="white" *ngIf="!billing_shipping_same">
+    <!-- <ion-item-divider color="white" *ngIf="!billing_shipping_same">
       Shipping Details
     </ion-item-divider>
 
@@ -129,7 +129,7 @@
       <ion-item  *ngIf="!billing_shipping_same">
         <ion-label floating>Phone Number</ion-label>
         <ion-input type="tel" clearInput [(ngModel)]="newUser.billing_address.phone"></ion-input>
-      </ion-item>
+      </ion-item> -->
 
 </ion-list>
 </ion-content>

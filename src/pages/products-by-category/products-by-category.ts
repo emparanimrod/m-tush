@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ModalController, ToastController } from 'ionic-angular';
+import { NavController, NavParams, ModalController, ToastController, LoadingController } from 'ionic-angular';
 import * as WC from 'woocommerce-api';
 import { CartPage } from '../cart/cart';
 import { Storage } from "@ionic/storage";
@@ -25,12 +25,13 @@ export class ProductsByCategoryPage {
               public navParams: NavParams, 
               public modalCtrl: ModalController,
               public storage: Storage,
-              public toastCtrl: ToastController, ) {
+              public toastCtrl: ToastController,
+              public loadingCtrl: LoadingController ) {
 
     this.page = 1;
     this.category = this.navParams.get("category");
     
-
+    
     this.WooCommerce = WC({
       url: 'https://cloud.edgetech.co.ke/m-tush',
       consumerKey: 'ck_3106173da4bf0f0269cd58e8be438139dc515b87',
@@ -39,18 +40,26 @@ export class ProductsByCategoryPage {
       verifySsl: false,
       queryStringAuth: true
     });
-    
+
+    let loading = this.loadingCtrl.create({
+      spinner: 'bubbles',
+      showBackdrop: false,
+      cssClass: 'backdrop'
+      });
+  loading.present();
 
     this.WooCommerce.getAsync("products?filter[category]="+ this.category.slug).then( (data) => {
       console.log(JSON.parse(data.body));
       this.products = JSON.parse(data.body).products;
+
+      loading.dismiss();
      }, (err) =>{
       console.log(err);
+
      });
-
-
-  }
-
+    
+    }
+  
   viewList() {
     this.viewType = 'list';
   }

@@ -3,7 +3,7 @@
     <!-- user profile -->
 <div padding class="menu-left menu-bg">
   <a menuClose>
-    <img class="profile-picture" src="assets/img/user/profile.jpg">
+    <img class="profile-picture" src="assets/img/user/profile.png">
     <h4 *ngIf="loggedIn" ion-text color="light"> {{ (this.user.firstname == '' ? this.user.username : this.user.firstname) || "" }} </h4>
     <h4 *ngIf="!loggedIn" ion-text color="light"> Welcome </h4>
   </a>

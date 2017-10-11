@@ -40,14 +40,15 @@
   <!--list categories-->
   <ion-card>
       <ion-list class="cat-list">
+
         <ion-row>
           <ion-col *ngFor="let category of categories | slice:0:3; let i = index" (click)="openCategoryPage(category)">
-            <ion-thumbnail>
+              <ion-thumbnail>
                 <img src="{{ category.image }}">
             </ion-thumbnail>
             <div text-center>{{ category.name }}</div>
           </ion-col>
-          <ion-col text-center (click)="viewCategories()">
+          <ion-col  text-center (click)="viewCategories()">
             <img style="width: 60px"src="assets/img/categories/all.png" />
             <div text-center>All categories</div>
           </ion-col>
@@ -83,13 +84,34 @@
     <ion-row>
       <ion-col *ngFor="let product of products" col-6 class="product" (click)="openProductPage(product)">
         <div class="card light-bg">
+            <ion-fab right top no-border *ngIf="product.sale_price" (click)="openCart()">
+                <button ion-fab color="danger">
+                  <p> {{ ((product.regular_price-product.sale_price)/product.regular_price)*100 | number: '1.1-1' }}%off </p>
+                </button>
+              </ion-fab>
           <img src="{{ product.featured_src }}" alt="{{ product.title }}">
-          <div class="price" text-center [innerHTML]="product.price_html"></div>
+          <div class="price" text-center> {{ product.regular_price | currency:'KSH':true }} </div>
         </div>
       </ion-col>
     </ion-row>
   </ion-grid>
 
+  <ion-grid class="list-cards">
+     <ion-row>
+       <ion-col *ngFor="let product of moreProducts" col-6 class="product" (click)="openProductPage(product)">
+         <div class="card light-bg">
+             <ion-fab right top no-border *ngIf="product.sale_price">
+                 <button ion-fab color="danger">
+                   <p text-wrap> {{ ((product.regular_price-product.sale_price)/product.regular_price)*100 | number: '1.1-1'}}%off </p>
+                 </button>
+               </ion-fab>
+           <img src="{{ product.featured_src }}" alt="{{ product.title }}">
+          <div class="price" text-center *ngIf="product.sale_price" > {{ product.sale_price | currency:'KSH':true }} </div>
+          <div class="price" text-center *ngIf="!product.sale_price" > {{ product.price | currency:'KSH':true }} </div>
+         </div>
+       </ion-col>
+     </ion-row>
+   </ion-grid>
 
   <!-- Unedited Slider -->
 
@@ -126,8 +148,8 @@
 </ion-list> -->
 
 
-<!-- <ion-infinite-scroll (ionInfinite)="loadMoreProducts($event)">
+<ion-infinite-scroll (ionInfinite)="loadMoreProducts($event)">
   <ion-infinite-scroll-content></ion-infinite-scroll-content>
-</ion-infinite-scroll> -->
+</ion-infinite-scroll>
 
 </ion-content>

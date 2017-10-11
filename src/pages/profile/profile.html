@@ -6,13 +6,118 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>profile</ion-title>
+  <ion-navbar color="primary">
+    <ion-title>My Profile</ion-title>
   </ion-navbar>
-
 </ion-header>
 
 
-<ion-content padding>
+<ion-content class="content">
+<!-- username-->
+<ion-item>
+    <ion-avatar style="width:72px;" item-center>
+      <img src="assets/img/user/profile_b.png" alt="">
+      <span item-center class="strong">{{ (this.user.firstname == '' ? this.user.username : this.user.firstname) || "" }}</span>
+    </ion-avatar>
+    <ion-icon name="md-create" item-right (click)="editProfile()" ></ion-icon>
+  </ion-item>
+
+<!-- Profile -->
+<ion-item-group>
+
+  <ion-item-divider bgColor text-center>PROFILE</ion-item-divider>
+  <ion-item>
+    Username: &nbsp; <b>{{ user.username }}</b>
+  </ion-item>
+  <ion-item>
+    Name: &nbsp; <b>{{ user.firstname }}</b> <b>{{ user.lastname }}</b>
+  </ion-item>
+  <ion-item>
+    Active since: &nbsp; <b>{{ user.registered | date }}</b>
+  </ion-item>
+  <ion-item>
+    Total Orders: &nbsp; <b>{{ profileInfo.orders_count }}</b>
+  </ion-item>
+
+  <!-- <ion-item>
+    <ion-icon name="md-create"></ion-icon>
+    Edit profile
+  </ion-item>
+  <ion-item (click)="changePassword()">
+    <ion-icon name="lock"></ion-icon>
+    Change password
+  </ion-item>
+  <ion-item>
+    <ion-icon name="md-share"></ion-icon>
+    Connected accounts
+  </ion-item>
+  <ion-item>
+    <ion-icon name="timer"></ion-icon>
+    Recent viewed
+  </ion-item> -->
+  <!-- <ion-item>
+    <ion-icon name="pricetags"></ion-icon>
+    Saved Offers
+  </ion-item> -->
+
+</ion-item-group>
+
+<ion-item-group>
+    <ion-item-divider bgColor text-center (click)="reload()" >BILLING INFO</ion-item-divider>
+    <ion-item>
+        First Name: &nbsp; <b>{{ profileInfo.billing_address.first_name }}</b>
+      </ion-item>
+      <ion-item>
+          Last Name: &nbsp; <b>{{ profileInfo.billing_address.last_name }}</b>
+      </ion-item>
+      <ion-item *ngIf="profileInfo.billing_address.company">
+          Company: &nbsp; <b>{{ profileInfo.billing_address.company }}</b>
+        </ion-item>
+      <ion-item>
+            Address 1: &nbsp; <b>{{ profileInfo.billing_address.address_1 }}</b>
+      </ion-item>
+      <ion-item>
+          Address 2: &nbsp; <b>{{ profileInfo.billing_address.address_2 }}</b>
+      </ion-item>
+      <ion-item>
+          City: &nbsp; <b>{{ profileInfo.billing_address.city }}</b>
+      </ion-item>
+      <ion-item>
+          Country: &nbsp; <b>{{ profileInfo.billing_address.country }}</b>
+      </ion-item>
+      <ion-item>
+          Phone Number: &nbsp; <b>{{ profileInfo.billing_address.phone }}</b>
+      </ion-item>
+      
+
+</ion-item-group>
+
+<ion-item-group>
+    <ion-item-divider bgColor text-center (click)="reload()" >SHIPPING INFO</ion-item-divider>
+    <ion-item>
+        First Name: &nbsp; <b>{{ profileInfo.shipping_address.first_name }}</b>
+      </ion-item>
+      <ion-item>
+          Last Name: &nbsp; <b>{{ profileInfo.shipping_address.last_name }}</b>
+      </ion-item>
+      <ion-item *ngIf="profileInfo.shipping_address.company">
+          Company: &nbsp; <b>{{ profileInfo.shipping_address.company }}</b>
+        </ion-item>
+      <ion-item>
+            Address 1: &nbsp; <b>{{ profileInfo.shipping_address.address_1 }}</b>
+      </ion-item>
+      <ion-item>
+          Address 2: &nbsp; <b>{{ profileInfo.shipping_address.address_2 }}</b>
+      </ion-item>
+      <ion-item>
+          City: &nbsp; <b>{{ profileInfo.shipping_address.city }}</b>
+      </ion-item>
+      <ion-item>
+          Country: &nbsp; <b>{{ profileInfo.shipping_address.country }}</b>
+      </ion-item>
+      <ion-item *ngIf="profileInfo.shipping_address.phone">
+          Phone Number: &nbsp; <b>{{ profileInfo.shipping_address.phone }}</b>
+      </ion-item>
+</ion-item-group>
 
 </ion-content>

@@ -14,8 +14,9 @@
 
 <ion-content no-padding class="categories">
     <ion-list class="list-no-border">
-        <ion-item *ngFor="let category of categories" (click)="openCategoryPage(category)">
-          {{ category.name }} ({{ category.count }})
-        </ion-item>
+      <button ion-item *ngFor="let category of categories" (click)="openCategoryPage(category)">
+        {{ category.name }}
+        <ion-badge item-end> {{ category.count }} </ion-badge>
+    </button>
       </ion-list>
 </ion-content>

@@ -12,6 +12,8 @@ import { HttpModule } from "@angular/http";
 // import * as WC from "woocommerce-api";
 // import { WC_URL } from "../models/appconfig";
 
+// import { AccordionComponent } from '../components/accordion/accordion';
+
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { CartPage } from '../pages/cart/cart';
@@ -22,6 +24,9 @@ import { CategoriesPage } from '../pages/categories/categories';
 import { OrdersPage } from '../pages/orders/orders';
 import { ProfilePage } from '../pages/profile/profile';
 import { SettingsPage } from '../pages/settings/settings';
+import { BillingInfoPage } from '../pages/billing-info/billing-info';
+import { ComponentsModule } from '../components/components.module';
+import { EditPasswordPage } from '../pages/edit-password/edit-password';
 
 @NgModule({
   declarations: [
@@ -37,11 +42,14 @@ import { SettingsPage } from '../pages/settings/settings';
     CategoriesPage,
     OrdersPage,
     ProfilePage,
-    SettingsPage
+    SettingsPage,
+    BillingInfoPage,
+    EditPasswordPage
   ],
   imports: [
     BrowserModule,
     HttpModule,
+    ComponentsModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot()
 
@@ -60,7 +68,9 @@ import { SettingsPage } from '../pages/settings/settings';
     CategoriesPage,
     OrdersPage,
     ProfilePage,
-    SettingsPage
+    SettingsPage,
+    BillingInfoPage,
+    EditPasswordPage
   ],
   providers: [
     StatusBar,

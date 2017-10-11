@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
 import { Storage } from "@ionic/storage";
 import * as WC from 'woocommerce-api';
+import { Menu } from '../menu/menu';
 
 @Component({
   selector: 'page-checkout',
@@ -18,7 +19,9 @@ export class CheckoutPage {
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams, 
-              public storage: Storage ) {
+              public storage: Storage,
+              public loadingCtrl: LoadingController,
+              public alertCtrl: AlertController ) {
 
     this.WooCommerce = WC({
       url: 'https://cloud.edgetech.co.ke/m-tush',
@@ -31,6 +34,13 @@ export class CheckoutPage {
       queryStringAuth: true
     });
 
+    let loading = this.loadingCtrl.create({
+      spinner: 'bubbles',
+      showBackdrop: false,
+      cssClass: 'backdrop'
+      });
+  loading.present();
+
     this.newOrder = {}; 
     this.newOrder.billing_address = {};
     this.newOrder.shipping_address = {};
@@ -39,8 +49,9 @@ export class CheckoutPage {
     this.paymentMethods = [
       { method_id: "mpesa", method_title: "M-Pesa" },
       { method_id: "cod", method_title: "Cash on Delivery" },
-      { method_id: "paypal", method_title: "PayPal" }
+      // { method_id: "paypal", method_title: "PayPal" }
     ];
+
 
     this.storage.get("userLoginInfo").then( (userLoginInfo) => {
 
@@ -51,6 +62,7 @@ export class CheckoutPage {
       this.WooCommerce.getAsync("customers/email/"+email).then( (data) => {
 
         this.newOrder = JSON.parse(data.body).customer;
+        loading.dismiss();
       })
 
     })
@@ -110,18 +122,42 @@ export class CheckoutPage {
         this.WooCommerce.postAsync("orders", orderData).then((data) => {
 
           console.log(JSON.parse(data.body).order);
+          this.storage.remove("cart").then( () => {
+
+            this.alertCtrl.create({
+              title: "Success!!", 
+              message: "You have been Successfully Logged Out",
+              buttons: ['Dismiss']
+      
+            }).present();
+
+            this.navCtrl.setRoot(Menu);
+
+          })
+          
 
         })
 
+        
 
+        // this.storage.remove("cart").then( () => {
+          
+        //               this.alertCtrl.create({
+        //                 title: "Success!!", 
+        //                 message: "You have been Successfully Logged Out",
+        //                 buttons: ['Dismiss']
+                
+        //               }).present();
+
+        //             })
       })
     }
 
 
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad CheckoutPage');
-  }
+  // ionViewDidLoad() {
+  //   console.log('ionViewDidLoad CheckoutPage');
+  // }
 
 }

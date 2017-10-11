@@ -1,5 +1,4 @@
 page-home,
-page-home,
 .home {
 
   ion-slides {
@@ -17,6 +16,8 @@ page-home,
     font-size: 5em;
     font-weight: bold;
   }
+
+  
 
   .deals {
 
@@ -48,24 +49,19 @@ page-home,
 
   .price {
     font-size: 1.2em;
+
+    ion-fab {
+      
+                      .btn-wish-list {
+                          position: absolute;
+                          top: -25px;
+                          width: 15px;
+                          height: 15px;
+                          border-radius: 50%;
+                          z-index: 1000;
+                          right: 1rem;
+                        }
   }
 } 
 
-    // ion-card {
-    //     margin: 0 !important;;
-    //     width: 200px !important;;
-    //     height: 200px !important;;
-    //     // width: 100% !important;;
-    // }
-    // ion-navbar {
-    //     color: #023D37 !important;;
-    // }
-    // ion-grid {
-    //     // margin-top: -40px !important;;
-    //     width: 100% !important;;
-    // }
-//     h5 {
-//         margin-top: -30px !important;;
-//     }
-    
-// }
+}
