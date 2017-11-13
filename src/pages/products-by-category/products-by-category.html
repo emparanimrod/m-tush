@@ -1,6 +1,12 @@
 
 <ion-header>
     <ion-navbar color="primary">
+      <ion-buttons start> 
+        <button ion-button (click)="goHome()">
+          <ion-icon name="home"></ion-icon>
+        </button>
+      </ion-buttons>
+       
         <!-- <button ion-button menuToggle>
           <ion-icon name="menu"></ion-icon>
         </button> -->
@@ -46,6 +52,9 @@
       <!-- new details code -->
 
           <div text-wrap (click)="openProductPage(product)">{{ product.title }}</div>
+          <div text-wrap>
+              <p [innerHTML]="product.short_description.substr(0, 60) + '...'" ></p>
+          </div>
           <div>
             <span ion-text color="danger" *ngIf="product.sale_price"> KSh {{ product.sale_price }}</span>
             <span ion-text color="danger" *ngIf="!product.sale_price" [innerHTML]="product.price_html"></span>

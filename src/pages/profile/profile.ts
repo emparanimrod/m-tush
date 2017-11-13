@@ -155,4 +155,9 @@ export class ProfilePage {
 
     
   }
+
+  goHome(){
+    this.navCtrl.popToRoot();
+  }
+
 }

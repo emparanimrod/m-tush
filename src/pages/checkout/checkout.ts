@@ -82,6 +82,14 @@ export class CheckoutPage {
     let data: any = {};
     let paymentData: any = {};
 
+    let loading = this.loadingCtrl.create({
+      spinner: 'bubbles',
+      showBackdrop: false,
+      cssClass: 'backdrop'
+      });
+  loading.present();
+
+
     this.paymentMethods.forEach( (element, index) =>{
       if(element.method_id == this.paymentMethod){
         paymentData = element;
@@ -126,10 +134,12 @@ export class CheckoutPage {
 
             this.alertCtrl.create({
               title: "Success!!", 
-              message: "You have been Successfully Logged Out",
-              buttons: ['Dismiss']
+              message: "You have successfully placed your order",
+              buttons: ['Okay']
       
             }).present();
+
+            loading.dismiss();
 
             this.navCtrl.setRoot(Menu);
 
@@ -138,18 +148,6 @@ export class CheckoutPage {
 
         })
 
-        
-
-        // this.storage.remove("cart").then( () => {
-          
-        //               this.alertCtrl.create({
-        //                 title: "Success!!", 
-        //                 message: "You have been Successfully Logged Out",
-        //                 buttons: ['Dismiss']
-                
-        //               }).present();
-
-        //             })
       })
     }
 

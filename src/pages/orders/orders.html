@@ -6,13 +6,38 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>orders</ion-title>
+  <ion-navbar color="primary">
+    <ion-title>My Orders</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content no-padding>
+  <ion-list no-padding>
+      <ion-card *ngFor="let order of orders" no-padding>
+        <ion-grid>
+          <ion-row>
+            <ion-col col-4>
+              <button ion-button class="avatar" text-wrap> Order # 
+                {{order.id}} </button>
+            </ion-col>
+            <ion-col col-8 text-right >
+              <div>
+              <h2 class="title"> {{order.status}} </h2>
+              </div>
+              <div>
+                <h2>Order made on <b>{{order.created_at | date:"fullDate"}}</b> </h2>
+                <h2>Total Cost: <b> {{order.total | currency:'Ksh':true}} </b></h2>
+              </div>
+            </ion-col>
+            <!-- <ion-col col-7 text-right *ngIf"order.status == completed">
+                <ion-card-title> {{order.status}} </ion-card-title>
+              </ion-col> -->
+          </ion-row>
+        </ion-grid>
+
+      </ion-card>
+  </ion-list>
 
 </ion-content>

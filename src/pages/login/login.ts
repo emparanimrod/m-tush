@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ToastController, AlertController } from 'ionic-angular';
+import { NavController, NavParams, ToastController, AlertController, LoadingController } from 'ionic-angular';
 import { Http } from "@angular/http";
 import { Storage } from "@ionic/storage";
+import { Menu } from '../menu/menu';
+import { SignupPage } from '../signup/signup';
 
 @Component({
   selector: 'page-login',
@@ -18,7 +20,8 @@ export class LoginPage {
               public http: Http,
               public toastCtrl: ToastController,
               public storage: Storage,
-              public alertCtrl: AlertController ) {
+              public alertCtrl: AlertController,
+              public loadingCtrl: LoadingController ) {
 
                 this.username = "";
                 this.password = "";
@@ -26,6 +29,14 @@ export class LoginPage {
   }
 
   login(){
+
+    let loading = this.loadingCtrl.create({
+      spinner: 'bubbles',
+      showBackdrop: false,
+      cssClass: 'backdrop'
+      });
+  loading.present();
+
     // ?insecure=cool
     this.http.get("https://cloud.edgetech.co.ke/m-tush/api/auth/generate_auth_cookie/?insecure=cool&username=" + this.username + "&password=" + this.password)
     .subscribe( (res) => {
@@ -39,10 +50,15 @@ export class LoginPage {
           duration: 4000
 
         }).present();
+
+        loading.dismiss();
+        
         return;
       }
 
       this.storage.set("userLoginInfo", response).then( (data) => {
+
+        loading.dismiss();
 
         this.alertCtrl.create({
           title: "Success!!", 
@@ -50,11 +66,7 @@ export class LoginPage {
           buttons: [{
             text: "OK", 
             handler: () => {
-              if(this.navParams.get("next")){
-                this.navCtrl.push(this.navParams.get("next"));
-              } else {
-                this.navCtrl.pop();
-              }
+              this.navCtrl.setRoot(Menu);
             }
           }]
 
@@ -66,5 +78,7 @@ export class LoginPage {
 
   }
 
-
+register(){
+  this.navCtrl.push(SignupPage);
+}
 }

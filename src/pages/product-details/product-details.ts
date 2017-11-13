@@ -41,7 +41,7 @@ export class ProductDetailsPage {
 
     }, (err) => {
       console.log(err);
-    })
+    });
     
   }
 
@@ -159,7 +159,9 @@ openCart(){
      this.modalCtrl.create(CartPage).present();
    }
 
-
+   goHome(){
+    this.navCtrl.popToRoot();
+  }
 
 
 toggleWishList(item){

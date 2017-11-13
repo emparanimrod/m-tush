@@ -64,10 +64,9 @@ export class CategoriesPage {
       }
 
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad CategoriesPage');
-
-      
-  }
+      goHome(){
+        this.navCtrl.popToRoot();
+      }
+    
 
 }

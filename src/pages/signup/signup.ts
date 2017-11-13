@@ -11,7 +11,7 @@ export class SignupPage {
 
   WooCommerce: any;
   newUser: any = {};
-  // billing_shipping_same: boolean;
+  billing_shipping_same: boolean;
 
   constructor(public navCtrl: NavController, 
               public navParams: NavParams, 
@@ -19,9 +19,9 @@ export class SignupPage {
               public toastCtrl: ToastController,
               public loadingCtrl: LoadingController ) {
 
-    // this.newUser.billing_address = {};
-    // this.newUser.shipping_address = {};
-    // this.newUser.billing_shipping_same = false;
+    this.newUser.billing_address = {};
+    this.newUser.shipping_address = {};
+    this.newUser.billing_shipping_same = false;
 
     this.WooCommerce = WC({
       url: 'https://cloud.edgetech.co.ke/m-tush',
@@ -39,9 +39,9 @@ export class SignupPage {
   //   console.log('ionViewDidLoad SignupPage');
   // }
 
-  // setBillingToShipping(){
-  //   this.billing_shipping_same = !this.billing_shipping_same;
-  // }
+  setBillingToShipping(){
+    this.billing_shipping_same = !this.billing_shipping_same;
+  }
 
   // checkEmail(){
 
@@ -67,34 +67,34 @@ export class SignupPage {
         "last_name": this.newUser.last_name,
         "username": this.newUser.username,
         "password": this.newUser.password,
-        // "billing_address": {
-        //   "first_name": this.newUser.first_name,
-        //   "last_name": this.newUser.last_name,
-        //   "company": "",
-        //   "address_1": this.newUser.billing_address.address_1,
-        //   "address_2": this.newUser.billing_address.address_2,
-        //   "city": this.newUser.billing_address.city,
-        //   "state": this.newUser.billing_address.state,
-        //   // "postcode": "00100",
-        //   "country": this.newUser.billing_address.country,
-        //   "email": this.newUser.email,
-        //   "phone": this.newUser.billing_address.phone
-        // },
-        // "shipping_address": {
-        //   "first_name": this.newUser.first_name,
-        //   "last_name": this.newUser.last_name,
-        //   "company": "",
-        //   "address_1": this.newUser.shipping_address.address_1,
-        //   "address_2": this.newUser.shipping_address.address_2,
-        //   "city": this.newUser.shipping_address.city,
-        //   "state": this.newUser.shipping_address.state,
-        //   // "postcode": "",
-        //   "country": this.newUser.shipping_address.country,
-        // }
+        "billing_address": {
+          "first_name": this.newUser.first_name,
+          "last_name": this.newUser.last_name,
+          "company": "",
+          "address_1": this.newUser.billing_address.address_1,
+          "address_2": this.newUser.billing_address.address_2,
+          "city": this.newUser.billing_address.city,
+          "state": this.newUser.billing_address.state,
+          // "postcode": "00100",
+          "country": this.newUser.billing_address.country,
+          "email": this.newUser.email,
+          "phone": this.newUser.billing_address.phone
+        },
+        "shipping_address": {
+          "first_name": this.newUser.first_name,
+          "last_name": this.newUser.last_name,
+          "company": "",
+          "address_1": this.newUser.shipping_address.address_1,
+          "address_2": this.newUser.shipping_address.address_2,
+          "city": this.newUser.shipping_address.city,
+          "state": this.newUser.shipping_address.state,
+          // "postcode": "",
+          "country": this.newUser.shipping_address.country,
+        }
     }
-    // if(this.billing_shipping_same){
-    //   this.newUser.shipping_address = this.newUser.shipping_address;
-    // }
+    if(this.billing_shipping_same){
+      this.newUser.shipping_address = this.newUser.shipping_address;
+    }
  
     let loading = this.loadingCtrl.create({
       spinner: 'bubbles',

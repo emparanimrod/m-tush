@@ -6,56 +6,52 @@
 -->
 <ion-header>
 
-  <ion-navbar color="bright" no-border no-shadow>
+  <ion-navbar color="primary" no-border no-shadow>
+      <button ion-button menuToggle>
+          <ion-icon name="menu"></ion-icon>
+        </button>
     <ion-title>Sign Up</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
-<ion-list>
-  <ion-item-divider color="white">Personal Details</ion-item-divider>
+<ion-content class="register" padding>
+<ion-list class="list-form">
+  <ion-item-divider text-center>Personal Details</ion-item-divider>
  <!-- Personal details -->
   <ion-item>
-    <ion-label floating>First Name</ion-label>
-    <ion-input type="text" [(ngModel)]="newUser.first_name"></ion-input>
+    <ion-input type="text" placeholder="First Name" [(ngModel)]="newUser.first_name"></ion-input>
   </ion-item>
 
   <ion-item>
-      <ion-label floating>Last Name</ion-label>
-      <ion-input type="text" [(ngModel)]="newUser.last_name"></ion-input>
+      <ion-input type="text" placeholder="Last Name" [(ngModel)]="newUser.last_name"></ion-input>
     </ion-item>
 
   <ion-item>
       <!-- to add (blur)="checkEmail()" -->
-      <ion-label floating>Email</ion-label>
-      <ion-input type="email" [(ngModel)]="newUser.email"></ion-input>
+      <ion-input type="email" placeholder="Email Address" [(ngModel)]="newUser.email"></ion-input>
     </ion-item>
 
   <ion-item>
-      <ion-label floating>Username</ion-label>
-      <ion-input type="text" [(ngModel)]="newUser.username"></ion-input>
+      <ion-input type="text" text-lowercase placeholder="Username" [(ngModel)]="newUser.username"></ion-input>
     </ion-item>
 
   <ion-item>
-      <ion-label floating>Password</ion-label>
-      <ion-input type="password" [(ngModel)]="newUser.password"></ion-input>
+      <ion-input type="password" placeholder="Password" [(ngModel)]="newUser.password"></ion-input>
     </ion-item>
 
     <ion-item>
-        <ion-label floating>Password</ion-label>
-        <ion-input type="password" [(ngModel)]="newUser.confirm_password"></ion-input>
+        <ion-input type="password" placeholder="Repeat Password" [(ngModel)]="newUser.confirm_password"></ion-input>
       </ion-item>
       <!-- Billing Details -->
-  <!-- <ion-item-divider color="white">Billing Details</ion-item-divider>
+  <ion-item-divider text-center>Billing Details</ion-item-divider>
     <ion-item>
-      <ion-label floating>Address 2</ion-label>
-      <ion-textarea type="text" max Length="80" [(ngModel)]="newUser.billing_address.address_1"></ion-textarea>
+      <ion-textarea type="text" placeholder="Your Address" max Length="80" [(ngModel)]="newUser.billing_address.address_1"></ion-textarea>
     </ion-item>
     <ion-item>
-        <ion-label floating>Address 2</ion-label>
-        <ion-textarea type="text" max Length="80" [(ngModel)]="newUser.billing_address.address_2"></ion-textarea>
+
+        <ion-textarea type="text" placeholder="Alternative Address" max Length="80" [(ngModel)]="newUser.billing_address.address_2"></ion-textarea>
     </ion-item>
     <ion-item>
       <ion-label floating>Country</ion-label>
@@ -91,33 +87,31 @@
     </ion-item>
 
     <ion-item>
-      <ion-label>Would you like to use the same shipping details?</ion-label>
+      <ion-label text-wrap>Would you like to use the same shipping details?</ion-label>
       <ion-checkbox (ionChange)="setBillingToShipping()"></ion-checkbox>
-    </ion-item> -->
+    </ion-item>
 
     <!-- Shipping Details -->
 
-    <!-- <ion-item-divider color="white" *ngIf="!billing_shipping_same">
+    <ion-item-divider text-center *ngIf="!billing_shipping_same">
       Shipping Details
     </ion-item-divider>
 
     <ion-item *ngIf="!billing_shipping_same">
-        <ion-label floating>Street Address</ion-label>
-        <ion-textarea type="text" max Length="80" [(ngModel)]="newUser.billing_address.address_1"></ion-textarea>
+        <ion-textarea type="text" placeholder="Your Address" max Length="80" [(ngModel)]="newUser.shipping_address.address_1"></ion-textarea>
       </ion-item>
       <ion-item *ngIf="!billing_shipping_same">
-          <ion-label floating>Surburb</ion-label>
-          <ion-textarea type="text" max Length="80" [(ngModel)]="newUser.billing_address.address_2"></ion-textarea>
+          <ion-textarea type="text" placeholder="Alternative Address" max Length="80" [(ngModel)]="newUser.shipping_address.address_2"></ion-textarea>
       </ion-item>
       <ion-item *ngIf="!billing_shipping_same">
         <ion-label floating>Country</ion-label>
-        <ion-select [(ngModel)]="newUser.billing_address.country">
+        <ion-select [(ngModel)]="newUser.shipping_address.country">
           <ion-option value="Kenya" selected="true">Kenya</ion-option>
         </ion-select>
       </ion-item>
       <ion-item *ngIf="!billing_shipping_same">
           <ion-label floating>County</ion-label>
-          <ion-select [(ngModel)]="newUser.billing_address.state">
+          <ion-select [(ngModel)]="newUser.shipping_address.state">
             <ion-option value="Nairobi" selected="true">Nairobi</ion-option>
             <ion-option value="Mombasa" >Mombasa</ion-option>
             <ion-option value="Kisumu" >Kisumu</ion-option>
@@ -128,8 +122,8 @@
       </ion-item>
       <ion-item  *ngIf="!billing_shipping_same">
         <ion-label floating>Phone Number</ion-label>
-        <ion-input type="tel" clearInput [(ngModel)]="newUser.billing_address.phone"></ion-input>
-      </ion-item> -->
+        <ion-input type="tel" clearInput [(ngModel)]="newUser.shipping_address.phone"></ion-input>
+      </ion-item>
 
 </ion-list>
 </ion-content>

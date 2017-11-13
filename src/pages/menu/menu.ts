@@ -118,6 +118,8 @@ openPage(pageName: string){
   }
   if(pageName == "logout"){
     this.storage.remove("userLoginInfo").then( () => {
+
+      this.storage.remove('cart');
       this.user = {};
       this.loggedIn = false;
 

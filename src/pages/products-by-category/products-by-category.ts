@@ -48,7 +48,7 @@ export class ProductsByCategoryPage {
       });
   loading.present();
 
-    this.WooCommerce.getAsync("products?filter[category]="+ this.category.slug).then( (data) => {
+    this.WooCommerce.getAsync("products?filter[category]="+ this.category.name).then( (data) => {
       console.log(JSON.parse(data.body));
       this.products = JSON.parse(data.body).products;
 
@@ -130,6 +130,9 @@ export class ProductsByCategoryPage {
     
   openCart(){
     this.modalCtrl.create(CartPage).present();
+  }
+  goHome(){
+    this.navCtrl.popToRoot();
   }
 
 }

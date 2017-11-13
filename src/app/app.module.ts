@@ -50,7 +50,10 @@ import { EditPasswordPage } from '../pages/edit-password/edit-password';
     BrowserModule,
     HttpModule,
     ComponentsModule,
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(MyApp, {
+      scrollAssist: false, 
+      autoFocusAssist: false
+  }),
     IonicStorageModule.forRoot()
 
   ],

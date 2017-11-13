@@ -3,6 +3,11 @@
 
   <ion-navbar color="bright">
     <ion-title style="text-align: center">Cart</ion-title>
+    <ion-buttons start> 
+    <button ion-button (click)="closeModal()">
+        <ion-icon name="close"></ion-icon>
+     </button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
@@ -43,7 +48,8 @@
           <span ion-text color="gray">Standard Shipping</span>
         </div>
         <div padding-bottom>
-          <span class="pull-right">{{ (item.product.price*item.qty) | currency:'KSH':true }}</span>
+            <span class="pull-right"> <p>Price</p> {{ item.product.price | currency:'KSH':true }}</span>
+          <span class="pull-right"> <p>SubTotal</p> {{ (item.product.price*item.qty) | currency:'KSH':true }}</span>
           <div class="clear"></div>
         </div>
         <div>

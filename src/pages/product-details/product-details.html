@@ -2,10 +2,13 @@
 <ion-header no-border>
 
   <ion-navbar color="primary">
-      <button ion-button menuToggle>
-          <ion-icon name="menu"></ion-icon>
-        </button>
-    <ion-title> {{ product.title }}  </ion-title>
+      <ion-buttons start> 
+          <button ion-button (click)="goHome()">
+         <ion-icon name="home"></ion-icon>
+      </button>
+      </ion-buttons>
+    <ion-title> 
+       {{ product.title }}  </ion-title>
     <ion-buttons end>
         <button ion-button (click)="goToSearch()">
           <ion-icon large name="search"></ion-icon>

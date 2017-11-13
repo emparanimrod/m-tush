@@ -11,24 +11,36 @@
 <ion-content padding class="login">
 <ion-list class="list-form">
 
-<div></div>
+<div>
     <ion-item>
-      <ion-input type="text" [(ngModel)]="username" placeholder="Email" ></ion-input>
+      <ion-input type="text" text-lowercase [(ngModel)]="username" placeholder="Username" ></ion-input>
     </ion-item>
-
-    <div></div>
+</div>
+<div>
     <ion-item>
       <ion-input type="password" [(ngModel)]="password" placeholder="Password"></ion-input>
     </ion-item>
+</div>
 
+<div>
+    <ion-item>
+
+      <button ion-button color="primary" block (click)="login()">LOGIN</button>
+    </ion-item>
+      
+    <ion-item>
+        <div text-right margin-top margin-bottom (click)="forgotPwd()">Forgot password?</div>
+    </ion-item>
+
+    <ion-item>
+        <div class="align-bottom" padding text-center>
+            No Account? <span class="bold" (click)="register()">Register</span>
+     </div>
+    </ion-item>
+    </div>
   </ion-list>
 
-  <button ion-button color="primary" block (click)="login()">LOGIN</button>
-  
-    <div text-right margin-top margin-bottom (click)="forgotPwd()">Forgot password?</div>
-  
-    <div class="align-bottom" padding text-center>
-        No Account? <span class="bold" (click)="register()">Register</span>
-      </div>
 
 </ion-content>
+
+
