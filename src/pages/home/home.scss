@@ -1,8 +1,19 @@
-page-home,
+page-home,{
+  .slider {
+    height: 29%;
+    width: fit-content;
+    
+  }
+  .slider-pic {
+    height: 100%;
+    width: 100%;
+  }
+}
 .home {
 
   .ion-slides {
-    height: 400px;
+    // height: 400px;
+    width: 100%;
   }
 
   .cat-list {

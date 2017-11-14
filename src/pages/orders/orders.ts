@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import * as WC from 'woocommerce-api';
 import { Storage } from "@ionic/storage";
+import { OrderDetailsPage } from '../order-details/order-details';
 
 /**
  * Generated class for the OrdersPage page.
@@ -70,5 +71,9 @@ export class OrdersPage {
    
    
   }
+  openOrder(order){
+    
+        this.navCtrl.push(OrderDetailsPage, {"order": order})
+      }
 
 }

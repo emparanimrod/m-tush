@@ -17,7 +17,7 @@
   <ion-list no-padding>
       <ion-card *ngFor="let order of orders" no-padding>
         <ion-grid>
-          <ion-row>
+          <ion-row (click)="openOrder(order)" >
             <ion-col col-4>
               <button ion-button class="avatar" text-wrap> Order # 
                 {{order.id}} </button>

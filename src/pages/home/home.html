@@ -28,9 +28,9 @@
     </button>
   </ion-fab> -->
 
-  <ion-slides pager no-padding autoplay="4000" style="height: 35%">
+  <ion-slides pager no-padding autoplay="4000" class="slider">
               <ion-slide no-padding style="margin: 0px;  padding: 0px" *ngFor="let slide of slides">
-            <img style="width: auto; height: 100vh !important;" no-padding src="{{ slide.src }}" alt="">
+            <img class="slider-pic" no-padding src="{{ slide.src }}" alt="">
           </ion-slide>
       
         </ion-slides>
@@ -89,7 +89,7 @@
                 </button>
               </ion-fab>
           <img src="{{ product.featured_src }}" (click)="openProductPage(product)" alt="{{ product.title }}">
-          <ion-chip *ngFor="let category of product.categories" style="margin-left: 5px" >
+          <ion-chip *ngFor="let category of product.categories | slice:0:2; let i = index" style="margin-left: 5px" >
               <ion-label color="bright"> {{ category }} </ion-label>
             </ion-chip>
           <h6 text-wrap text-center (click)="openProductPage(product)"> {{product.title}} </h6>
@@ -109,7 +109,7 @@
                  </button>
                </ion-fab>
            <img src="{{ product.featured_src }}" (click)="openProductPage(product)" alt="{{ product.title }}">
-           <ion-chip *ngFor="let category of product.categories" style="margin-left: 5px" >
+           <ion-chip *ngFor="let category of product.categories | slice:0:2; let i = index" style="margin-left: 5px" >
               <ion-label color="bright"> {{ category }} </ion-label>
             </ion-chip>
            <h6 text-wrap text-center (click)="openProductPage(product)"> {{product.title}} </h6>

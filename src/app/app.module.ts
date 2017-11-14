@@ -27,6 +27,7 @@ import { SettingsPage } from '../pages/settings/settings';
 import { BillingInfoPage } from '../pages/billing-info/billing-info';
 import { ComponentsModule } from '../components/components.module';
 import { EditPasswordPage } from '../pages/edit-password/edit-password';
+import { OrderDetailsPage } from '../pages/order-details/order-details';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { EditPasswordPage } from '../pages/edit-password/edit-password';
     ProfilePage,
     SettingsPage,
     BillingInfoPage,
-    EditPasswordPage
+    EditPasswordPage,
+    OrderDetailsPage
   ],
   imports: [
     BrowserModule,
@@ -73,7 +75,8 @@ import { EditPasswordPage } from '../pages/edit-password/edit-password';
     ProfilePage,
     SettingsPage,
     BillingInfoPage,
-    EditPasswordPage
+    EditPasswordPage,
+    OrderDetailsPage
   ],
   providers: [
     StatusBar,

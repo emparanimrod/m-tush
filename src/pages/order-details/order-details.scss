@@ -1,0 +1,41 @@
+page-order-details {
+    .top {
+        background-color: #25aae1;
+    }
+    .title {
+        padding: 0;
+        color: white;
+        font-weight: 450;
+    }
+
+    .card-order {
+        font-size: 10pt;
+        color: grey;
+        padding: 0;
+        vertical-align: middle;
+        // background-color: rgb(255, 204, 174);
+    }
+    .green {
+        color: green;
+        text-transform: capitalize;
+        // font-size: 12pt;
+    }
+    .yellow {
+        color: rgb(255, 174, 0);
+        text-transform: capitalize;
+        // font-size: 13pt;
+    }
+    .btn {
+        border-radius: 50%;
+        height: 60px;
+        width: 60px;
+        vertical-align: middle;
+    }
+    .content {
+        padding: 0;
+    }
+    .content-head {
+        font-size: 14pt;
+        padding: 0;
+    }
+}

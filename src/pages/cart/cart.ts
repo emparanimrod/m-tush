@@ -131,9 +131,11 @@ export class CartPage {
 
     this.storage.get("userLoginInfo").then( (data) => {
       if (data != null){
-        this.navCtrl.push(CheckoutPage)
+        this.viewCtrl.dismiss();
+        this.navCtrl.push(CheckoutPage);
       } else {
-        this.navCtrl.push(LoginPage, {next: CheckoutPage})
+        this.viewCtrl.dismiss();
+        this.navCtrl.push(LoginPage, {next: CheckoutPage});
       }
     } )
 

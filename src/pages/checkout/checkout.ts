@@ -141,7 +141,7 @@ export class CheckoutPage {
 
             loading.dismiss();
 
-            this.navCtrl.setRoot(Menu);
+            this.navCtrl.popToRoot();
 
           })
           

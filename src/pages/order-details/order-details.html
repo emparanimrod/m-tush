@@ -1,0 +1,127 @@
+<!--
+  Generated template for the OrderDetailsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>Order Details{{order.id}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content no-padding>
+  <ion-card class="card-order">
+    <ion-card-header  class="top">
+    <ion-card-title class="title" text-center>General Details</ion-card-title>
+    </ion-card-header>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-6>
+          Total Cost
+        </ion-col >
+        <ion-col col-6 text-right><b>{{order.total | currency:'Ksh':true}}</b></ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-6>Order Placed on</ion-col>
+        <ion-col col-6 text-right><b>{{order.created_at | date:"fullDate"}}</b></ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-6>Order Status</ion-col>
+        <ion-col col-6 *ngIf="completed" class="green" text-right><b>{{order.status}}</b></ion-col>
+        <ion-col col-6 *ngIf="!completed" class="yellow" text-right><b>{{order.status}}</b></ion-col>
+      </ion-row>
+      <ion-row>
+          <ion-col col-6>Payment Method</ion-col>
+          <ion-col col-6 text-right><b>{{order.payment_details.method_title}}</b></ion-col>
+        </ion-row>
+    </ion-grid>
+  </ion-card>
+
+     <!-- products -->
+     <ion-card class="card-order">
+        <ion-card-header class="top" text-center>
+        <ion-card-title class="title">Products</ion-card-title>
+        </ion-card-header>
+          <ion-grid>
+            <ion-row *ngFor="let product of order.line_items">
+              <ion-col col-3>
+                <button ion-button full class="btn">{{product.quantity}} pcs</button>
+              </ion-col>
+              <ion-col col-9>
+                <ion-card-title class="content-head">{{product.name}}</ion-card-title>
+                <ion-card-content class="content">Unit Price <b>{{product.price}}</b></ion-card-content>
+                <ion-col col-12 class="content">Sub-total <b>{{product.total}}</b></ion-col>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+      </ion-card>
+
+  <ion-card  class="card-order">
+    <ion-card-header  class="top">
+    <ion-card-title class="title" text-center>Billing Details</ion-card-title>
+    </ion-card-header>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-6>Billed to</ion-col>
+        <ion-col col-6 text-right><b> {{order.billing_address.first_name}} {{order.billing_address.last_name}}</b> </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-6> Address 1 </ion-col>
+        <ion-col col-6 text-right><b>{{order.billing_address.address_1}}</b></ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-6>Address 2</ion-col>
+        <ion-col col-6 text-right><b>{{order.billing_address.address_2}}</b></ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-6>Location</ion-col>
+        <ion-col col-6 text-right><b>{{order.billing_address.city}}, {{order.billing_address.country}}</b></ion-col>
+      </ion-row>
+      <ion-row>
+          <ion-col col-4>Email Address</ion-col>
+          <ion-col col-8 text-right><b>{{order.billing_address.email}}</b></ion-col>
+      </ion-row>
+      <ion-row>
+          <ion-col col-6>Phone Number</ion-col>
+          <ion-col col-6 text-right><b>{{order.billing_address.phone}}</b></ion-col>
+        </ion-row>
+    </ion-grid>
+  </ion-card>
+
+  <!-- shipping detaILS -->
+  <ion-card  class="card-order">
+      <ion-card-header class="top">
+      <ion-card-title class="title" text-center>Shipping Details</ion-card-title>
+      </ion-card-header>
+      <ion-grid>
+        <ion-row>
+          <ion-col col-6>Billed to</ion-col>
+          <ion-col col-6 text-right><b> {{order.shipping_address.first_name}} {{order.billing_address.last_name}}</b> </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-6> Address 1 </ion-col>
+          <ion-col col-6 text-right><b>{{order.shipping_address.address_1}}</b></ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-6>Address 2</ion-col>
+          <ion-col col-6 text-right><b>{{order.shipping_address.address_2}}</b></ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-6>Location</ion-col>
+          <ion-col col-6 text-right><b>{{order.shipping_address.city}}, {{order.shipping_address.country}}</b></ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col col-4>Email Address</ion-col>
+            <ion-col col-8 text-right><b>{{order.shipping_address.email}}</b></ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col col-6>Phone Number</ion-col>
+            <ion-col col-6 text-right><b>{{order.shipping_address.phone}}</b></ion-col>
+          </ion-row>
+      </ion-grid>
+    </ion-card>
+</ion-content>
