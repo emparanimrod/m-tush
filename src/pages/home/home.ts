@@ -70,7 +70,9 @@ export class HomePage {
    let loading = this.loadingCtrl.create({
     spinner: 'bubbles',
     showBackdrop: false,
-    cssClass: 'backdrop'
+    cssClass: 'backdrop',
+    
+
     });
 loading.present();
 

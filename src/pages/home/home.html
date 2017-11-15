@@ -41,13 +41,13 @@
       <ion-list class="cat-list">
 
         <ion-row>
-          <ion-col *ngFor="let category of categories | slice:0:3; let i = index" (click)="openCategoryPage(category)">
+          <ion-col col-3 *ngFor="let category of categories | slice:0:3; let i = index" (click)="openCategoryPage(category)">
               <ion-thumbnail>
                 <img src="{{ category.image }}">
             </ion-thumbnail>
             <div text-center>{{ category.name }}</div>
           </ion-col>
-          <ion-col  text-center (click)="viewCategories()">
+          <ion-col col-3 item-right class="cat-right" (click)="viewCategories()">
             <img src="assets/img/categories/all.png" />
             <div text-center>All categories</div>
           </ion-col>
