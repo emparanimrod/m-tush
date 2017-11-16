@@ -38,17 +38,20 @@
 
 <ion-list class="list-full-border" no-margin>
     <ion-item class="product" *ngFor="let item of cartItems; let i = index">
+      <ion-grid></ion-grid>
       <ion-thumbnail no-margin item-left>
         <img [src]="item.product.featured_src">
+        <!-- <span class="pull-right"> <p>Price</p> {{ item.product.price | currency:'KSH':true }}</span> -->
       </ion-thumbnail>
       <!--item's information-->
       <div>
         <div text-wrap>{{ item.product.title }}</div>
         <div class="text-sm">
           <span ion-text color="gray">Standard Shipping</span>
+          <!-- <span class="pull-right"> <p>Price</p> {{ item.product.price | currency:'KSH':true }}</span> -->
         </div>
         <div padding-bottom>
-            <span class="pull-right"> <p>Price</p> {{ item.product.price | currency:'KSH':true }}</span>
+            <!-- <span class="pull-right"> <p>Price</p> {{ item.product.price | currency:'KSH':true }}</span> -->
           <span class="pull-right"> <p>SubTotal</p> {{ (item.product.price*item.qty) | currency:'KSH':true }}</span>
           <div class="clear"></div>
         </div>

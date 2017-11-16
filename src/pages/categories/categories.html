@@ -19,9 +19,24 @@
 
 <ion-content no-padding class="categories">
     <ion-list class="list-no-border">
-      <button ion-item *ngFor="let category of categories" (click)="openCategoryPage(category)">
-        {{ category.name }}
+      <ion-item  *ngFor="let category of categories" (click)="openCategoryPage(category)">
+        <h2 class="cat">{{ category.name }}</h2>
         <ion-badge item-end> {{ category.count }} </ion-badge>
-    </button>
-      </ion-list>
+      </ion-item>
+    </ion-list>
+
+      <ion-card class="popular">
+        <ion-card-header  class="cardheader" text-center>
+          <ion-card-title color="primary" class="cardheader" no-padding no-margin>Featured Categories</ion-card-title>
+        </ion-card-header>
+        <ion-grid>
+          <ion-row>
+            <ion-col text-center col-4 *ngFor="let category of popularCategories |  slice:0:3; let i = index">
+              <img [src]="category.image"/>
+              <h6 class="cat"> {{category.name}} </h6>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+        
+      </ion-card>
 </ion-content>

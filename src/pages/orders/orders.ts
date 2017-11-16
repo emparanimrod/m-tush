@@ -24,6 +24,9 @@ export class OrdersPage {
   userInfo: any;
   id: any[];
   orders:any[];
+  myOrders: string = 'orders';
+  completed: boolean;
+  cancelled: boolean;
 
   constructor(public navCtrl: NavController, 
               public navParams: NavParams, 
@@ -51,7 +54,8 @@ export class OrdersPage {
       let loading = this.loadingCtrl.create({
         spinner: 'bubbles',
         showBackdrop: false,
-        cssClass: 'backdrop'
+        cssClass: 'backdrop',
+
         });
     loading.present();
       

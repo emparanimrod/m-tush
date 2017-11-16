@@ -81,7 +81,7 @@
  <div class="price" text-center>Featured Products</div>
  <ion-grid class="list-cards">
     <ion-row>
-      <ion-col *ngFor="let product of products" col-6 col-md-4 col-lg-3 class="product" >
+      <ion-col *ngFor="let product of products" col-4 class="product" >
         <div class="card light-bg">
             <ion-fab right top no-border *ngIf="product.sale_price" (click)="openCart()">
                 <button ion-fab color="danger">
@@ -101,7 +101,7 @@
 
   <ion-grid class="list-cards">
      <ion-row>
-       <ion-col *ngFor="let product of moreProducts" col-6 col-md-4 col-lg-3 class="product" >
+       <ion-col *ngFor="let product of moreProducts" col-4 >
          <div class="card light-bg">
              <ion-fab right top no-border *ngIf="product.sale_price">
                  <button ion-fab color="danger">

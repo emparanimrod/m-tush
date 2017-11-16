@@ -12,12 +12,14 @@ export class CategoriesPage {
 
   WooCommerce: any;
   categories: any[];
+  popularCategories: any[];
 
   constructor(public navCtrl: NavController, 
               public navParams: NavParams, 
               public loadingCtrl: LoadingController) {
 
     this.categories = [];
+    this.popularCategories = [];
 
     //woocommerce credentials
     this.WooCommerce = WC({
@@ -48,6 +50,13 @@ export class CategoriesPage {
 
           loading.dismiss();
   
+        } 
+        if(temp[i].count >= 2){
+          if(temp[i].image){
+          this.popularCategories.push(temp[i]);}
+
+          console.log(this.popularCategories);
+
         }
       }
     

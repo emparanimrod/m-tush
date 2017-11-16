@@ -8,36 +8,89 @@
 
   <ion-navbar color="primary">
     <ion-title>My Orders</ion-title>
+   
   </ion-navbar>
+ 
+      <ion-segment [(ngModel)]="myOrders" color="primary">
+          <ion-segment-button value="orders">
+            All Orders
+          </ion-segment-button>
+          <ion-segment-button value="track">
+            Track Your Order
+          </ion-segment-button>
+        </ion-segment>
 
 </ion-header>
 
 
 <ion-content no-padding>
-  <ion-list no-padding>
+<div [ngSwitch]="myOrders">
+  <div *ngSwitchCase="'orders'">
+      <ion-list no-padding >
+          <ion-card *ngFor="let order of orders" no-padding>
+            <ion-grid>
+              <ion-row (click)="openOrder(order)" >
+                <ion-col col-4>
+                  <button ion-button class="avatar" text-wrap> Order # 
+                    {{order.id}} 
+                  </button>
+                </ion-col>
+                <ion-col col-8 text-right >
+                  <div>
+                  <h2 class="title"> {{order.status}} </h2>
+                  </div>
+                  <div>
+                    <h2>Order made on <b>{{order.created_at | date:"fullDate"}}</b> </h2>
+                    <h2>Total Cost: <b> {{order.total | currency:'Ksh':true}} </b></h2>
+                  </div>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-card>
+      </ion-list>
+  </div>
+ <div *ngSwitchCase="'track'">
+  <ion-list>
       <ion-card *ngFor="let order of orders" no-padding>
-        <ion-grid>
-          <ion-row (click)="openOrder(order)" >
-            <ion-col col-4>
-              <button ion-button class="avatar" text-wrap> Order # 
-                {{order.id}} </button>
-            </ion-col>
-            <ion-col col-8 text-right >
-              <div>
-              <h2 class="title"> {{order.status}} </h2>
-              </div>
-              <div>
-                <h2>Order made on <b>{{order.created_at | date:"fullDate"}}</b> </h2>
-                <h2>Total Cost: <b> {{order.total | currency:'Ksh':true}} </b></h2>
-              </div>
-            </ion-col>
-            <!-- <ion-col col-7 text-right *ngIf"order.status == completed">
-                <ion-card-title> {{order.status}} </ion-card-title>
-              </ion-col> -->
-          </ion-row>
-        </ion-grid>
-
+          <ion-grid>
+              <ion-row (click)="openOrder(order)" >
+                <ion-col col-4>
+                  <button ion-button class="avatar" text-wrap> Order # 
+                    {{order.id}} 
+                  </button>
+                </ion-col>
+                <ion-col col-8 text-right text-wrap >
+                    <h2>Order Status</h2>
+                  <div>
+                  <h2 class="title"> {{order.status}} </h2>
+                  </div>
+                  <div *ngIf="order.status == 'completed'" class="progressbar" text-right>
+                      <ul class="progressbar">
+                          <li class="active">Designer at Google</li>
+                          <li class="active">Freelance Developer</li>
+                          <li>Microsoft ???</li>
+                        </ul>
+                  </div>
+                </ion-col>
+                <ion-col col-12 text-right>
+                  
+                </ion-col>
+              </ion-row>
+            </ion-grid>
       </ion-card>
   </ion-list>
+ </div>
+</div>
+      
+<!-- <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130.2 130.2">
+  <circle class="path circle" fill="none" stroke="#73AF55" stroke-width="6" stroke-miterlimit="10" cx="65.1" cy="65.1" r="62.1"/>
+  <polyline class="path check" fill="none" stroke="#73AF55" stroke-width="6" stroke-linecap="round" stroke-miterlimit="10" points="100.2,40.2 51.5,88.8 29.8,67.5 "/>
+</svg>
+
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130.2 130.2">
+  <circle class="path circle" fill="none" stroke="#D06079" stroke-width="6" stroke-miterlimit="10" cx="65.1" cy="65.1" r="62.1"/>
+  <line class="path line" fill="none" stroke="#D06079" stroke-width="6" stroke-linecap="round" stroke-miterlimit="10" x1="34.4" y1="37.9" x2="95.8" y2="92.3"/>
+  <line class="path line" fill="none" stroke="#D06079" stroke-width="6" stroke-linecap="round" stroke-miterlimit="10" x1="95.8" y1="38" x2="34.4" y2="92.2"/>
+</svg> -->
 
 </ion-content>
