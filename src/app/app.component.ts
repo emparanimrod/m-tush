@@ -6,6 +6,7 @@
     // import { LoginPage } from '../pages/login/login';
 
     import { Menu } from '../pages/menu/menu';
+import { OrdersPage } from '../pages/orders/orders';
     // import { SignupPage } from '../pages/signup/signup';
     @Component({
       templateUrl: 'app.html'
@@ -14,6 +15,7 @@
       @ViewChild(Nav) nav: Nav;
     
       rootPage: any = Menu;
+      // rootPage: any = OrdersPage;
   
     
       constructor(public platform: Platform, 

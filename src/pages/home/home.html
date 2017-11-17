@@ -41,15 +41,17 @@
       <ion-list class="cat-list">
 
         <ion-row>
-          <ion-col col-3 *ngFor="let category of categories | slice:0:3; let i = index" (click)="openCategoryPage(category)">
-              <ion-thumbnail>
-                <img src="{{ category.image }}">
+          <ion-col col-3 class="cat-item" *ngFor="let category of categories | slice:0:3; let i = index" (click)="openCategoryPage(category)">
+              <ion-thumbnail class="cat-image overlay">
+                <img class="cat-img" src="{{ category.image }}">
             </ion-thumbnail>
-            <div text-center>{{ category.name }}</div>
+            <div text-center text-wrap class="cat-text">{{ category.name }}</div>
           </ion-col>
-          <ion-col col-3 item-right class="cat-right" (click)="viewCategories()">
+          <ion-col col-3 item-right  (click)="viewCategories()">
+            <ion-thumbnail class="cat-image">
             <img src="assets/img/categories/all.png" />
-            <div text-center>All categories</div>
+            </ion-thumbnail>
+            <div text-center text-wrap>All categories</div>
           </ion-col>
         </ion-row>
       </ion-list>
@@ -82,17 +84,17 @@
  <ion-grid class="list-cards">
     <ion-row>
       <ion-col *ngFor="let product of products" col-4 class="product" >
-        <div class="card light-bg">
+        <div class="card light-bg new">
             <ion-fab right top no-border *ngIf="product.sale_price" (click)="openCart()">
                 <button ion-fab color="danger">
                   <p> {{ ((product.regular_price-product.sale_price)/product.regular_price)*100 | number: '1.1-1' }}%off </p>
                 </button>
               </ion-fab>
-          <img src="{{ product.featured_src }}" (click)="openProductPage(product)" alt="{{ product.title }}">
-          <ion-chip *ngFor="let category of product.categories | slice:0:2; let i = index" style="margin-left: 5px" >
+          <img class="prod-img" src="{{ product.featured_src }}" (click)="openProductPage(product)" alt="{{ product.title }}">
+          <ion-chip *ngFor="let category of product.categories | slice:0:1; let i = index" style="margin-left: 5px" >
               <ion-label color="bright"> {{ category }} </ion-label>
             </ion-chip>
-          <h6 text-wrap text-center (click)="openProductPage(product)"> {{product.title}} </h6>
+          <h6 text-wrap class="prod-name" text-center (click)="openProductPage(product)"> {{product.title}} </h6>
           <div class="price" text-center>{{ product.regular_price | currency:'KSH':true }} </div>
         </div>
       </ion-col>

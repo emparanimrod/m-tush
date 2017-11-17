@@ -1,6 +1,47 @@
 page-home,{
-  .cat-right {
-    align-content: right;
+
+  .prod-name {
+    padding: 0;
+    margin-top: 0;
+  }
+  .price {
+    vertical-align: text-bottom;
+  }
+  .new {
+    height: 100%;
+  }
+  .h6 {
+    padding: 0;
+  }
+  .prod-img {
+    max-height: 150px;
+  }
+  .cat-item {
+    padding: 2px;
+    min-width: 24%;
+    margin: 0; 
+  }
+  // .overlay{
+  //   color: darkgrey;
+  //   opacity: 0.2;
+  // }
+  .cat-image {
+    height: 70px;
+    width: auto;
+
+
+  }
+  .cat-img {
+    // opacity: 0.8;
+    height: 90px;
+  }
+  .cat-text {
+    padding: 2px;
+    margin-top: 20px;
+    // color: white
+  }
+  .prod-image {
+    height: 55px;
   }
   .slider {
     height: 29%;
@@ -22,7 +63,9 @@ page-home,{
   .cat-list {
     font-size: 0.8em;
     font-weight: bold;
-    align-content: left ;
+    // align-content: left ;
+    padding: 0;
+    margin: 0;
   }
 
   .cat-icon {

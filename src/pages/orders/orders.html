@@ -50,6 +50,45 @@
       </ion-list>
   </div>
  <div *ngSwitchCase="'track'">
+
+  <ion-card no-padding>
+    <ion-card-title text-center>Key</ion-card-title>
+      <ion-grid>
+          <ion-row>
+            <ion-col col-12>
+              Key
+            </ion-col>
+            <ion-col col-3>
+              <ion-avatar class="tracking-ware">
+                <img src="assets/img/icons/2.png"/>
+             </ion-avatar>
+             Vendor
+            </ion-col>
+            <ion-col col-3>
+              <ion-avatar class="tracking">
+                <img src="assets/img/icons/1.png"/>
+             </ion-avatar>
+             Arrived at Warehouse
+            </ion-col>
+            <ion-col col-3>
+                <ion-avatar class="tracking-truck">
+                   <img src="assets/img/icons/4.png"/>
+                </ion-avatar>
+             On its way
+            </ion-col>
+            <ion-col col-3>
+              <ion-avatar class="tracking-check">
+                <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+      viewBox="0 0 98.5 98.5" enable-background="new 0 0 98.5 98.5" xml:space="preserve">
+      <path class="checkmark" fill="none" stroke-width="8" stroke-miterlimit="10" d="M81.7,17.8C73.5,9.3,62,4,49.2,4
+      C24.3,4,4,24.3,4,49.2s20.3,45.2,45.2,45.2s45.2-20.3,45.2-45.2c0-8.6-2.4-16.6-6.5-23.4l0,0L45.6,68.2L24.7,47.3"/>
+      </svg>
+              </ion-avatar>
+             Delivered
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+  </ion-card>
   <ion-list>
       <ion-card *ngFor="let order of orders" no-padding>
           <ion-grid>
@@ -64,13 +103,139 @@
                   <div>
                   <h2 class="title"> {{order.status}} </h2>
                   </div>
-                  <div *ngIf="order.status == 'completed'" class="progressbar" text-right>
-                      <ul class="progressbar">
-                          <li class="active">Designer at Google</li>
-                          <li class="active">Freelance Developer</li>
-                          <li>Microsoft ???</li>
-                        </ul>
-                  </div>
+                  <!-- completed -->
+                    <ion-grid *ngIf="order.status == 'completed'">
+                      <ion-row>
+                        <ion-col col-12>
+                          <div class="line"></div>
+                        </ion-col>
+                        <ion-col col-3 text-right class="timeline">
+                          <ion-avatar class="tracking-ware">
+                             <img src="assets/img/icons/2.png"/>
+                          </ion-avatar>
+                        </ion-col>
+                        <ion-col col-3 text-center class="timeline">
+                          <ion-avatar class="tracking">
+                             <img src="assets/img/icons/1.png"/>
+                          </ion-avatar>
+                        </ion-col>
+                        <ion-col col-3 text-center class="timeline">
+                          <ion-avatar class="tracking-truck">
+                             <img src="assets/img/icons/4.png"/>
+                          </ion-avatar>
+                        </ion-col>  
+                            <ion-col col-3 text-right class="timeline">
+                                <ion-avatar class="tracking-check">
+                                  <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 98.5 98.5" enable-background="new 0 0 98.5 98.5" xml:space="preserve">
+  <path class="checkmark" fill="none" stroke-width="8" stroke-miterlimit="10" d="M81.7,17.8C73.5,9.3,62,4,49.2,4
+	C24.3,4,4,24.3,4,49.2s20.3,45.2,45.2,45.2s45.2-20.3,45.2-45.2c0-8.6-2.4-16.6-6.5-23.4l0,0L45.6,68.2L24.7,47.3"/>
+</svg>
+                                </ion-avatar>
+                            </ion-col>
+                      </ion-row>
+                    </ion-grid>
+
+                    <!-- processing -->
+                    <ion-grid *ngIf="order.status == 'processing'">
+                      <ion-row>
+                        <ion-col col-12>
+                          <div class="line"></div>
+                        </ion-col>
+                        <ion-col col-3 text-right class="timeline">
+                          <ion-avatar class="tracking-ware">
+                             <img src="assets/img/icons/2.png"/>
+                          </ion-avatar>
+                        </ion-col>
+                        <ion-col col-3 text-center class="timeline">
+                          <ion-avatar class="tracking">
+                             <img src="assets/img/icons/1.png"/>
+                          </ion-avatar>
+                        </ion-col>
+                        <ion-col col-3 text-center class="timeline">
+                          <ion-avatar class="tracking-truck-pr">
+                             <img src="assets/img/icons/4.png"/>
+                          </ion-avatar>
+                        </ion-col>  
+                            <ion-col col-3 text-right class="timeline">
+                                <ion-avatar class="tracking-check">
+                                  <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 98.5 98.5" enable-background="new 0 0 98.5 98.5" xml:space="preserve">
+  <path class="checkmark-processed" fill="none" stroke-width="8" stroke-miterlimit="10" d="M81.7,17.8C73.5,9.3,62,4,49.2,4
+	C24.3,4,4,24.3,4,49.2s20.3,45.2,45.2,45.2s45.2-20.3,45.2-45.2c0-8.6-2.4-16.6-6.5-23.4l0,0L45.6,68.2L24.7,47.3"/>
+</svg>
+                                </ion-avatar>
+                            </ion-col>
+                      </ion-row>
+                    </ion-grid>
+
+                    <!-- cancelled -->
+
+                    <ion-grid *ngIf="order.status == 'cancelled'">
+                      <ion-row>
+                        <ion-col col-12>
+                          <div class="line"></div>
+                        </ion-col>
+                        <ion-col col-3 text-right class="timeline">
+                          <ion-avatar class="tracking-ware">
+                             <img src="assets/img/icons/2.png"/>
+                          </ion-avatar>
+                        </ion-col>
+                        <ion-col col-3 text-center class="timeline">
+                          <ion-avatar class="tracking">
+                             <img src="assets/img/icons/1.png"/>
+                          </ion-avatar>
+                        </ion-col>
+                        <ion-col col-3 text-center class="timeline">
+                          <ion-avatar class="tracking-truck">
+                             <img src="assets/img/icons/4.png"/>
+                          </ion-avatar>
+                        </ion-col>  
+                            <ion-col col-3 text-right class="timeline">
+                                <ion-avatar class="tracking-check">
+                                  <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 98.5 98.5" enable-background="new 0 0 98.5 98.5" xml:space="preserve">
+  <path class="checkmark-processed" fill="none" stroke-width="8" stroke-miterlimit="10" d="M81.7,17.8C73.5,9.3,62,4,49.2,4
+	C24.3,4,4,24.3,4,49.2s20.3,45.2,45.2,45.2s45.2-20.3,45.2-45.2c0-8.6-2.4-16.6-6.5-23.4l0,0L45.6,68.2L24.7,47.3"/>
+</svg>
+                                </ion-avatar>
+                            </ion-col>
+                      </ion-row>
+                    </ion-grid>
+
+                    <!-- pending -->
+
+                    <ion-grid *ngIf="order.status == 'pending'">
+                      <ion-row>
+                        <ion-col col-12>
+                          <div class="line"></div>
+                        </ion-col>
+                        <ion-col col-3 text-right class="timeline">
+                          <ion-avatar class="tracking-ware">
+                             <img src="assets/img/icons/2.png"/>
+                          </ion-avatar>
+                        </ion-col>
+                        <ion-col col-3 text-center class="timeline">
+                          <ion-avatar class="tracking">
+                             <img src="assets/img/icons/6.png"/>
+                          </ion-avatar>
+                        </ion-col>
+                        <ion-col col-3 text-center class="timeline">
+                          <ion-avatar class="tracking-truck-new">
+                             <img src="assets/img/icons/7.png"/>
+                          </ion-avatar>
+                        </ion-col>  
+                            <ion-col col-3 text-right class="timeline">
+                                <ion-avatar class="tracking-check">
+                                  <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	                                      viewBox="0 0 98.5 98.5" enable-background="new 0 0 98.5 98.5" xml:space="preserve">
+                                         <path class="checkmark-processed" fill="none" stroke-width="8" stroke-miterlimit="10" d="M81.7,17.8C73.5,9.3,62,4,49.2,4
+                                        	C24.3,4,4,24.3,4,49.2s20.3,45.2,45.2,45.2s45.2-20.3,45.2-45.2c0-8.6-2.4-16.6-6.5-23.4l0,0L45.6,68.2L24.7,47.3"/>
+                                  </svg>
+                                </ion-avatar>
+                            </ion-col>
+                      </ion-row>
+                    </ion-grid>
                 </ion-col>
                 <ion-col col-12 text-right>
                   
@@ -94,3 +259,6 @@
 </svg> -->
 
 </ion-content>
+<ion-footer>
+
+</ion-footer>
