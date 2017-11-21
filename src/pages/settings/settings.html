@@ -31,5 +31,47 @@
       </ion-row>
     </ion-grid>
     </ion-card>
+    <ion-card>
+      <ion-grid>
+        <ion-row>
+          <ion-col col-9>
+            <ion-item text-wrap>
+              <h6>Would you like to subscribe to our newsletter?</h6>
+            </ion-item>
+          </ion-col>
+          <ion-col col-3>
+            <ion-item>
+              <ion-toggle value="false" checked="true"></ion-toggle>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      </ion-card>
   </ion-list>
+
+   <ion-grid>
+          <ion-row class="padded">
+            <ion-col col-6 (click)="addresses()" text-center class="padded">
+              <ion-card>
+              <ion-avatar class="avatar">
+               <ion-icon color="favorite" class="avi" name="compass"></ion-icon>
+              </ion-avatar>
+              <ion-card-title class="title">
+              My Addresses
+              </ion-card-title>
+              </ion-card>
+            </ion-col>
+
+            <ion-col col-6 (click)="wishlist()" text-center class="padded">
+                <ion-card>
+                <ion-avatar class="avatar">
+                 <ion-icon color="danger" class="avi" name="heart"></ion-icon>
+                </ion-avatar>
+                <ion-card-title class="title">
+                  My Wishlist
+                </ion-card-title>
+                </ion-card>
+              </ion-col>
+          </ion-row>
+        </ion-grid>
 </ion-content>

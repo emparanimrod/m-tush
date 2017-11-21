@@ -14,6 +14,7 @@ import { OrdersPage } from '../pages/orders/orders';
     export class MyApp {
       @ViewChild(Nav) nav: Nav;
     
+      
       rootPage: any = Menu;
       // rootPage: any = OrdersPage;
   
@@ -29,7 +30,8 @@ import { OrdersPage } from '../pages/orders/orders';
         this.platform.ready().then(() => {
           // Okay, so the platform is ready and our plugins are available.
           // Here you can do any higher level native things you might need.
-          this.statusBar.styleDefault();
+          // this.statusBar.overlaysWebView(true);
+          this.statusBar.backgroundColorByName('turquoise');
           this.splashScreen.hide();
         });
       }

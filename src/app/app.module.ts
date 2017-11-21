@@ -28,6 +28,7 @@ import { BillingInfoPage } from '../pages/billing-info/billing-info';
 import { ComponentsModule } from '../components/components.module';
 import { EditPasswordPage } from '../pages/edit-password/edit-password';
 import { OrderDetailsPage } from '../pages/order-details/order-details';
+import { AddressesPage } from '../pages/addresses/addresses';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { OrderDetailsPage } from '../pages/order-details/order-details';
     SettingsPage,
     BillingInfoPage,
     EditPasswordPage,
-    OrderDetailsPage
+    OrderDetailsPage,
+    AddressesPage
   ],
   imports: [
     BrowserModule,
@@ -76,7 +78,8 @@ import { OrderDetailsPage } from '../pages/order-details/order-details';
     SettingsPage,
     BillingInfoPage,
     EditPasswordPage,
-    OrderDetailsPage
+    OrderDetailsPage,
+    AddressesPage
   ],
   providers: [
     StatusBar,

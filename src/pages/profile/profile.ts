@@ -4,6 +4,7 @@ import * as WC from 'woocommerce-api';
 import { Storage } from "@ionic/storage";
 import { BillingInfoPage } from '../billing-info/billing-info';
 import { EditPasswordPage } from '../edit-password/edit-password';
+import { WC_URL } from '../../models/appconfig';
 
 @Component({
   selector: 'page-profile',
@@ -28,16 +29,7 @@ export class ProfilePage {
                 this.user = {};
                 
 
-    this.WooCommerce = WC({
-      url: 'https://cloud.edgetech.co.ke/m-tush',
-      consumerKey: 'ck_3106173da4bf0f0269cd58e8be438139dc515b87',
-      consumerSecret: 'cs_ee6a004c51a4206d4d9a374b1b05adac24927f53',
-      version: 'v3',
-      // wpAPI: false,
-      // version: 'wc/v1',
-      verifySsl: false,
-      queryStringAuth: true
-    });
+                this.WooCommerce = WC(WC_URL);
 
     this.profileInfo = {};
     this.profileInfo.billing_address = {};
@@ -90,7 +82,7 @@ export class ProfilePage {
         }
 
       } )
-    })
+    });
 
 
   }

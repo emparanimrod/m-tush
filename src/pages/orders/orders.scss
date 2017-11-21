@@ -12,7 +12,7 @@ page-orders {
 
 }
 // Colors
-$primary: #f1c40f;
+$primary: #25aae1;
 $secondary: #ecf0f1;
 $background: #2c3e50;
 
@@ -156,6 +156,21 @@ body {
     100% {
       stroke-dashoffset: 0;
     }
+  }
+  .key {
+    // width: 40px;
+    // height: 40px;
+    align-content: center;
+    // left: -20px;
+    padding-left: 25px;
+    padding-right: 25px;
+    padding-top: 0;
+
+  }
+  .key-title {
+    font-size: 12pt;
+    padding: 0;
+    color: $primary;
   }
   
 }

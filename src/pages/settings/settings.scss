@@ -3,13 +3,35 @@ page-settings {
     ion-list {
         padding: 0;
     }
+    ion-grid {
+        padding: 0;
+        margin: 0;
+    }
+    ion-card {
+        padding: 0;
+        margin: 0;
+    }
+    .padded {
+        padding: 0;
+        margin: 0;
+    }
+    .avi {
+        font-size: 60pt;
+        padding: 8px;
+    }
+    .card {
+        vertical-align: middle;
+    }
+    .title {
+        vertical-align: middle;
+        font-size: 14pt;
+        font-weight: 500;
+    }
 }
 .backdrop {
-    background-color: white;
-    // background-size: 80%;
-    // padding-top: 24px;
+    background-color: #25aae1;
     border: 0;
     box-shadow: 0;
-    // z-index: -200;
+
     
 }
