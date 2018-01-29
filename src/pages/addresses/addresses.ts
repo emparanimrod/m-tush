@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, LoadingController } from 'ionic-angular';
-import { WishlistPage } from '../wishlist/wishlist';
 import { Storage } from "@ionic/storage";
 import * as WC from 'woocommerce-api';
 import { WC_URL } from '../../models/appconfig'

@@ -3,10 +3,10 @@
     import { Nav, Platform } from 'ionic-angular';
     import { StatusBar } from '@ionic-native/status-bar';
     import { SplashScreen } from '@ionic-native/splash-screen';
-    // import { LoginPage } from '../pages/login/login';
-
+    import { OneSignal } from "@ionic-native/onesignal";
     import { Menu } from '../pages/menu/menu';
-import { OrdersPage } from '../pages/orders/orders';
+    import { OrderPlacedPage } from '../pages/order-placed/order-placed';
+
     // import { SignupPage } from '../pages/signup/signup';
     @Component({
       templateUrl: 'app.html'
@@ -16,12 +16,13 @@ import { OrdersPage } from '../pages/orders/orders';
     
       
       rootPage: any = Menu;
-      // rootPage: any = OrdersPage;
+      // rootPage: any = OrderPlacedPage;
   
     
       constructor(public platform: Platform, 
                   public statusBar: StatusBar, 
-                  public splashScreen: SplashScreen) {
+                  public splashScreen: SplashScreen, 
+                  public oneSignal: OneSignal ) {
         this.initializeApp();
         
       }
@@ -31,8 +32,23 @@ import { OrdersPage } from '../pages/orders/orders';
           // Okay, so the platform is ready and our plugins are available.
           // Here you can do any higher level native things you might need.
           // this.statusBar.overlaysWebView(true);
-          this.statusBar.backgroundColorByName('turquoise');
-          this.splashScreen.hide();
+          this.statusBar.backgroundColorByHexString('#25aae1');
+          this.splashScreen.show();
+          //onesignal code
+
+          this.oneSignal.startInit('205b8af8-fa5e-4e86-b7ab-c682ad141463', '191192921743');
+          
+          this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.InAppAlert);
+          
+          this.oneSignal.handleNotificationReceived().subscribe(() => {
+           // do something when notification is received
+          });
+          
+          this.oneSignal.handleNotificationOpened().subscribe(() => {
+            // do something when a notification is opened
+          });
+          
+          this.oneSignal.endInit();
         });
       }
     

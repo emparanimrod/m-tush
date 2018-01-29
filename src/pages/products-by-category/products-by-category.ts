@@ -4,6 +4,7 @@ import * as WC from 'woocommerce-api';
 import { CartPage } from '../cart/cart';
 import { Storage } from "@ionic/storage";
 import { ProductDetailsPage } from '../product-details/product-details';
+import { WC_URL } from '../../models/appconfig';
 
 
 @Component({
@@ -32,14 +33,7 @@ export class ProductsByCategoryPage {
     this.category = this.navParams.get("category");
     
     
-    this.WooCommerce = WC({
-      url: 'https://cloud.edgetech.co.ke/m-tush',
-      consumerKey: 'ck_3106173da4bf0f0269cd58e8be438139dc515b87',
-      consumerSecret: 'cs_ee6a004c51a4206d4d9a374b1b05adac24927f53',
-      version: 'v3',
-      verifySsl: false,
-      queryStringAuth: true
-    });
+    this.WooCommerce = WC(WC_URL);
 
     let loading = this.loadingCtrl.create({
       spinner: 'bubbles',
@@ -120,7 +114,7 @@ export class ProductsByCategoryPage {
 
         this.toastCtrl.create({
           message: "Your Cart has been Updated",
-          duration: 3000
+          duration: 1000
         }).present();
 
       })

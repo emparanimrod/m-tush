@@ -1,0 +1,73 @@
+<!--
+  Generated template for the MpesaPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="bright" >
+    <ion-title>Pay Via Mpesa</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-card no-padding>
+    <ion-card-header text-center>
+      <h1 class="head"><b>PAY VIA MPESA</b></h1>
+    </ion-card-header>
+    <!-- <ion-card-content padding> -->
+      <h1 padding>
+        To pay via M-Pesa, Head to the PayBill Option 
+        on your M-PESA Menu
+      </h1>
+      <ion-list>
+        <ion-item>
+          <ion-grid>
+            <ion-row>
+              <ion-col col-6>
+               <p> PayBill Number </p>
+              </ion-col>
+              <ion-col col-6 text-right>
+                <p> <b>123456</b> </p>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-item>
+        <ion-item>
+            <ion-grid>
+              <ion-row>
+                <ion-col col-6>
+                  <p>Account Number</p>
+                </ion-col>
+                <ion-col col-6 text-right>
+                 <p><b>{{ order.order_number }} </b></p>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-item>
+          <ion-item>
+              <ion-grid>
+                <ion-row>
+                  <ion-col col-6>
+                    <p>Amount</p>
+                  </ion-col>
+                  <ion-col col-6 text-right>
+                   <p><b>{{ order.total }} </b></p>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-item>
+          <ion-item>
+            <button ion-button round block large color="mpesa" (click)="confirmPayment()" >
+            CONFIRM PAYMENT
+          </button>
+          <button ion-button clear block color="primary" (click)="cancel()"  item-center>Cancel</button>
+          </ion-item>
+         
+      </ion-list>
+    <!-- </ion-card-content> -->
+  </ion-card>
+</ion-content>

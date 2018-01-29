@@ -38,7 +38,7 @@ export class LoginPage {
   loading.present();
 
     // ?insecure=cool
-    this.http.get("https://cloud.edgetech.co.ke/m-tush/api/auth/generate_auth_cookie/?insecure=cool&username=" + this.username + "&password=" + this.password)
+    this.http.get("https://prod.edgetech.co.ke/m-tush/api/auth/generate_auth_cookie/?insecure=cool&username=" + this.username + "&password=" + this.password)
     .subscribe( (res) => {
       console.log(res.json());
 

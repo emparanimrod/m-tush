@@ -3,6 +3,7 @@ import { NavController, NavParams, ToastController, ModalController } from 'ioni
 import * as WC from 'woocommerce-api';
 import { Storage } from "@ionic/storage";
 import { CartPage } from '../cart/cart'
+import { WC_URL } from '../../models/appconfig';
 
 @Component({
   selector: 'page-product-details',
@@ -23,16 +24,7 @@ export class ProductDetailsPage {
     this.product = this.navParams.get('product');
     console.log(this.product)
 
-    this.WooCommerce = WC({
-      url: 'https://cloud.edgetech.co.ke/m-tush',
-      consumerKey: 'ck_3106173da4bf0f0269cd58e8be438139dc515b87',
-      consumerSecret: 'cs_ee6a004c51a4206d4d9a374b1b05adac24927f53',
-      version: 'v1',
-      // wpAPI: false,
-      // version: 'wc/v1',
-      verifySsl: false,
-      queryStringAuth: true
-    });
+    this.WooCommerce = WC(WC_URL);
 
     this.WooCommerce.getAsync('products/' + this.product.id + '/reviews').then((data)=>{
 
@@ -93,7 +85,7 @@ export class ProductDetailsPage {
 
         this.toastCtrl.create({
           message: "Your Cart has been Updated",
-          duration: 3000
+          duration: 1000
         }).present();
 
       })
@@ -146,7 +138,7 @@ export class ProductDetailsPage {
     
             this.toastCtrl.create({
               message: "Your Cart has been Updated",
-              duration: 3000
+              duration: 1000
             }).present();
 
             this.modalCtrl.create(CartPage).present();
@@ -163,6 +155,54 @@ openCart(){
     this.navCtrl.popToRoot();
   }
 
+addToWishlist(product){
+  this.storage.get("wishlist").then((data)=> {
+    console.log('wishlist',data);
+
+ if(data == null || data.length == 0){
+
+      data = [];
+
+      data.push({
+        "product": product,
+        "amount": product.price
+      });
+     } else {
+
+       let added = 0;
+
+      for(let i = 0; i < data.length; i++){
+         if(product.id == data[i].product){
+          console.log("Product is already in the wishlist");
+          this.toastCtrl.create({
+            message: "The product is already in your wishlist",
+            duration: 3000
+          }).present();
+
+        }
+      }
+      if(added == 0){
+        data.push({
+          "product": product,
+          // "amount": parseFloat(product.price)
+        });
+      }
+    }
+
+    this.storage.set("wishlist", data).then( ()=>{
+
+      console.log("Wishlist has been updated");
+      console.log(data);
+
+      this.toastCtrl.create({
+        message: "Your Wishlist has been updated",
+        duration: 3000
+      }).present();
+
+    });
+
+  });
+}
 
 toggleWishList(item){
 

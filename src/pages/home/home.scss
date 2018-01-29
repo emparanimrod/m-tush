@@ -1,9 +1,10 @@
-page-home,{
-
-  .prod-name {
+page-home, 
+{
+  ion-card {
     padding: 0;
-    margin-top: 0;
+    margin: 0;
   }
+
   .price {
     vertical-align: text-bottom;
   }
@@ -13,36 +14,44 @@ page-home,{
   .h6 {
     padding: 0;
   }
+  .prod {
+    margin: 0;
+    padding: 0;
+  }
+  .prod-col {
+    padding: 0;
+    margin: 0;
+  }
   .prod-img {
-    max-height: 150px;
+    // max-height: 150px;
+    width: 100%;
   }
   .cat-item {
     padding: 2px;
-    min-width: 24%;
     margin: 0; 
+    // height: 0px;
   }
   // .overlay{
   //   color: darkgrey;
   //   opacity: 0.2;
   // }
   .cat-image {
-    height: 70px;
-    width: auto;
-
 
   }
   .cat-img {
     // opacity: 0.8;
     height: 90px;
+    width: 120px;
   }
   .cat-text {
-    padding: 2px;
-    margin-top: 20px;
+    // padding: 2px;
+    // margin-top: 20px;
     // color: white
   }
   .prod-image {
-    height: 55px;
+    // height: 55px;
   }
+  
   .slider {
     height: 29%;
     width: fit-content;
@@ -52,6 +61,18 @@ page-home,{
     height: 100%;
     width: 100%;
   }
+  .prod-col {
+    padding: 0;
+    margin: 0px;
+  }
+  .prod-name {
+    padding: 0;
+    margin-top: 0;
+  }
+}
+.tool {
+  padding-top: 0;
+  margin-top:-5px;
 }
 .home {
 
@@ -74,12 +95,17 @@ page-home,{
     font-weight: bold;
   }
 
+  .card {
+    padding: 0px;
+    margin: 0;
+  }
+
   
 
   .deals {
 
     ion-col {
-      padding: 6px;
+      // padding: 6px;
       padding-top: 0;
 
       &:first-child {
@@ -91,13 +117,13 @@ page-home,{
       }
 
       ion-card {
-        width: 100%;
-        padding: 0.8em;
+        // width: 100%;
+        // padding: 0.8em;
         margin: 0;
 
         ion-badge {
 
-          width: 100%;
+          // width: 100%;
           margin: 5px 0;
         }
       }
@@ -105,20 +131,30 @@ page-home,{
   }
 
   .price {
-    font-size: 1.2em;
+    font-size: 0.5em;
+
+    ion-card{
+      padding: 0;
+      margin: 0;
+    }
 
     ion-fab {
-      
+      font-size: 6pt;
                       .btn-wish-list {
                           position: absolute;
                           top: -25px;
-                          width: 15px;
-                          height: 15px;
+                          width: 10px;
+                          height: 10px;
                           border-radius: 50%;
                           z-index: 1000;
                           right: 1rem;
+                          
                         }
   }
 } 
 
+}
+.navi {
+  padding-bottom: 0;
+  margin-bottom: -5px;
 }

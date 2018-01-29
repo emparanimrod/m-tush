@@ -11,6 +11,7 @@ import { CategoriesPage } from '../categories/categories';
 import { OrdersPage } from '../orders/orders';
 import { ProfilePage } from '../profile/profile';
 import { SettingsPage } from '../settings/settings';
+import { WC_URL } from '../../models/appconfig';
 
 @Component({
   selector: 'page-menu',
@@ -36,16 +37,7 @@ export class Menu {
     this.user = {};
     
   
-  this.WooCommerce = WC({
-    url: 'https://cloud.edgetech.co.ke/m-tush',
-    consumerKey: 'ck_3106173da4bf0f0269cd58e8be438139dc515b87',
-    consumerSecret: 'cs_ee6a004c51a4206d4d9a374b1b05adac24927f53',
-    version: 'v3',
-    // wpAPI: false,
-    // version: 'wc/v1',
-    verifySsl: false,
-    queryStringAuth: true
-  });
+    this.WooCommerce = WC(WC_URL);
 
   this.WooCommerce.getAsync('products/categories').then((data) =>{
     console.log(JSON.parse(data.body).product_categories);

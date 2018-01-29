@@ -43,8 +43,8 @@
 <!-- Wishlist -->
   
   <div class="rlt">
-    <button ion-button class="btn-wish-list card" color="light">
-          <ion-icon name="md-heart" color="danger"></ion-icon>
+    <button ion-button (click)="addToWishlist()" class="btn-wish-list card" color="light">
+          <ion-icon name="md-heart"  color="danger"></ion-icon>
       <!-- <ion-icon name="md-heart" color="gray" [hidden]="item.on_wish_list"></ion-icon> -->
       <!-- <ion-icon name="md-heart" color="danger" [hidden]="!item.on_wish_list"></ion-icon> -->
     </button>

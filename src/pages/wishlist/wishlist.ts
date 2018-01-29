@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
+import { Storage } from "@ionic/storage";
 
 /**
  * Generated class for the WishlistPage page.
@@ -8,14 +9,15 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
  * Ionic pages and navigation.
  */
 
-@IonicPage()
 @Component({
   selector: 'page-wishlist',
   templateUrl: 'wishlist.html',
 })
 export class WishlistPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, 
+              public navParams: NavParams,
+              public storage: Storage ) {
   }
 
   ionViewDidLoad() {

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, AlertController, ToastController, LoadingController } from 'ionic-angular';
 import * as WC from 'woocommerce-api';
 import { LoginPage } from '../login/login';
+import { WC_URL } from '../../models/appconfig';
 
 @Component({
   selector: 'page-signup',
@@ -23,16 +24,7 @@ export class SignupPage {
     this.newUser.shipping_address = {};
     this.newUser.billing_shipping_same = false;
 
-    this.WooCommerce = WC({
-      url: 'https://cloud.edgetech.co.ke/m-tush',
-      consumerKey: 'ck_3106173da4bf0f0269cd58e8be438139dc515b87',
-      consumerSecret: 'cs_ee6a004c51a4206d4d9a374b1b05adac24927f53',
-      version: 'v3',
-      // wpAPI: false,
-      // version: 'wc/v1',
-      verifySsl: false,
-      queryStringAuth: true})
-
+    this.WooCommerce = WC(WC_URL);
   }
 
   // ionViewDidLoad() {

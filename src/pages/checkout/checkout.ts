@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, AlertController, ViewController } from 'ionic-angular';
 import { Storage } from "@ionic/storage";
 import * as WC from 'woocommerce-api';
-import { Menu } from '../menu/menu';
+import { WC_URL } from '../../models/appconfig';
+import { HomePage } from '../home/home';
+import { OrderPlacedPage } from '../order-placed/order-placed';
+import { MpesaPage } from '../mpesa/mpesa';
 
 @Component({
   selector: 'page-checkout',
@@ -16,23 +19,16 @@ export class CheckoutPage {
   billing_shipping_same: boolean;
   WooCommerce: any;
   userInfo: any;
+  orderDetails: any;
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams, 
               public storage: Storage,
               public loadingCtrl: LoadingController,
-              public alertCtrl: AlertController ) {
+              public alertCtrl: AlertController,
+              public viewCtrl: ViewController ) {
 
-    this.WooCommerce = WC({
-      url: 'https://cloud.edgetech.co.ke/m-tush',
-      consumerKey: 'ck_3106173da4bf0f0269cd58e8be438139dc515b87',
-      consumerSecret: 'cs_ee6a004c51a4206d4d9a374b1b05adac24927f53',
-      version: 'v3',
-      // wpAPI: false,
-      // version: 'wc/v1',
-      verifySsl: false,
-      queryStringAuth: true
-    });
+                this.WooCommerce = WC(WC_URL);
 
     let loading = this.loadingCtrl.create({
       spinner: 'bubbles',
@@ -47,7 +43,7 @@ export class CheckoutPage {
     this.billing_shipping_same = false;
 
     this.paymentMethods = [
-      { method_id: "mpesa", method_title: "M-Pesa" },
+      { method_id: "easypay", method_title: "M-Pesa" },
       { method_id: "cod", method_title: "Cash on Delivery" },
       // { method_id: "paypal", method_title: "PayPal" }
     ];
@@ -62,10 +58,12 @@ export class CheckoutPage {
       this.WooCommerce.getAsync("customers/email/"+email).then( (data) => {
 
         this.newOrder = JSON.parse(data.body).customer;
+        console.log(this.newOrder);
         loading.dismiss();
-      })
+      });
 
-    })
+    });
+
   }
 
   setBillingToShipping(){
@@ -87,7 +85,7 @@ export class CheckoutPage {
       showBackdrop: false,
       cssClass: 'backdrop'
       });
-  loading.present();
+      loading.present();
 
 
     this.paymentMethods.forEach( (element, index) =>{
@@ -100,7 +98,7 @@ export class CheckoutPage {
       payment_details : {
         method_id: paymentData.method_id,
         method_title: paymentData.method_title,
-        paid: true
+        paid: false
       },
 
       billing_address: this.newOrder.billing_address,
@@ -109,8 +107,80 @@ export class CheckoutPage {
       line_items: orderItems
     };
 
-    if(paymentData.method_id == "paypal"){
+    if(paymentData.method_id == "easypay"){
+      this.storage.get("cart").then( (cart) => {
+        
+                cart.forEach( (element, index) => {
+                  orderItems.push({
+                    product_id: element.product.id,
+                    quantity: element.qty
+                  });
+                });
+        
+                data.line_items = orderItems;
+        
+                let orderData: any = {};
+        
+               
+        
+                orderData.order = data;
+                console.log(data);
+               
+        
+                // this.WooCommerce.postAsync("orders", orderData).then((response) => {
+                //   console.log(response);});
+        
+                  this.WooCommerce.postAsync("orders", orderData).then((data) => {
+                    console.log(data);
+                  // console.log(JSON.parse(data.body).order);
+        
+                  if(data.error){
+                    
+                    this.alertCtrl.create({
+                      title: "Error",
+                      message: "could not complete your order. Please Try again",
+                      buttons: ['okay']
+                    });
+                    loading.dismiss();
+                  } else {
+                  
+        
+                  this.orderDetails = JSON.parse(data.body).order;
+                 console.log(this.orderDetails);
+        
+                 this.viewCtrl.dismiss();
 
+                 this.alertCtrl.create({
+                  title: "Success!!", 
+                  message: "You have successfully placed your order number {{orderDetails.id}} ",
+                  buttons: [
+                    {text: 'Okay',
+                    handler: () => {
+                      this.viewCtrl.dismiss();
+                      
+                    } }]
+          
+                }).present(); 
+
+                this.navCtrl.push(MpesaPage, {"order": this.orderDetails});
+
+                  // this.storage.remove("cart").then( () => {
+                  //   loading.dismiss();
+                  
+        
+        
+                    
+                    // this.viewCtrl.dismiss();
+                    // this.navCtrl.push(OrderPlacedPage);
+                   
+                    
+                    // this.navCtrl.push(OrderPlacedPage, {'order': order} );
+                    //  {'order': order}
+              //     });
+                }
+                });
+              });
+              // this.navCtrl.push(OrderPlacedPage);
     } else {
       this.storage.get("cart").then( (cart) => {
 
@@ -125,37 +195,79 @@ export class CheckoutPage {
 
         let orderData: any = {};
 
+       
+
         orderData.order = data;
+        console.log(data);
+       
 
-        this.WooCommerce.postAsync("orders", orderData).then((data) => {
+        // this.WooCommerce.postAsync("orders", orderData).then((response) => {
+        //   console.log(response);});
 
-          console.log(JSON.parse(data.body).order);
-          this.storage.remove("cart").then( () => {
+          this.WooCommerce.postAsync("orders", orderData).then((data) => {
+            console.log(data);
+          // console.log(JSON.parse(data.body).order);
 
+          if(data.error){
+            
             this.alertCtrl.create({
-              title: "Success!!", 
-              message: "You have successfully placed your order",
-              buttons: ['Okay']
-      
-            }).present();
-
+              title: "Error",
+              message: "could not complete your order. Please Try again",
+              buttons: ['okay']
+            });
             loading.dismiss();
-
-            this.navCtrl.popToRoot();
-
-          })
+          } else {
           
 
-        })
+          this.orderDetails = JSON.parse(data.body).order;
+         console.log(this.orderDetails);
 
-      })
+         loading.dismiss();
+
+         this.alertCtrl.create({
+          title: "Success!!", 
+          message: "You have successfully placed your order number {{orderDetails.id}} ",
+          buttons: [
+            {text: 'Okay',
+            handler: () => {
+              this.viewCtrl.dismiss();
+              
+            } }]
+  
+        }).present();
+
+        this.navCtrl.push(OrderPlacedPage, {"order": this.orderDetails});
+
+
+
+        }
+        });
+      });
+      // this.navCtrl.push(OrderPlacedPage);
     }
 
 
   }
 
+  // placeOrder(){
+  //    //test
+  //   //  loading.dismiss();
+    
+  //    this.viewCtrl.dismiss();
+  //   if(this.paymentData.method_id = "easypay"){
+  //     this.navCtrl.push(MpesaPage, {"order": this.newOrder});
+  //   } else {
+  //     this.navCtrl.push(OrderPlacedPage, {"order": this.newOrder});
+  //   }
+
+     
+  // }
+
   // ionViewDidLoad() {
   //   console.log('ionViewDidLoad CheckoutPage');
   // }
+  close(){
+    this.viewCtrl.dismiss();
+  }
 
 }

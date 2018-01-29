@@ -3,6 +3,7 @@ import { NavController, NavParams, ViewController, AlertController } from 'ionic
 import { Storage } from "@ionic/storage";
 import { CheckoutPage } from '../checkout/checkout';
 import { LoginPage } from '../login/login';
+import { ModalController } from 'ionic-angular/components/modal/modal-controller';
 
 @Component({
   selector: 'page-cart',
@@ -20,7 +21,8 @@ export class CartPage {
               public navParams: NavParams, 
               public storage: Storage,
               public viewCtrl: ViewController,
-              public alertCtrl: AlertController ) {
+              public alertCtrl: AlertController, 
+              public modalCtrl: ModalController ) {
 
                 this.total = 0.00;
 
@@ -132,7 +134,8 @@ export class CartPage {
     this.storage.get("userLoginInfo").then( (data) => {
       if (data != null){
         this.viewCtrl.dismiss();
-        this.navCtrl.push(CheckoutPage);
+        // this.navCtrl.push(CheckoutPage);
+        this.modalCtrl.create(CheckoutPage).present();
       } else {
         this.viewCtrl.dismiss();
         this.navCtrl.push(LoginPage, {next: CheckoutPage});

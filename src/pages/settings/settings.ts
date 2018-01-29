@@ -27,7 +27,7 @@ export class SettingsPage {
     this.navCtrl.push(AddressesPage);
   }
   wishlist(){
-    this.navCtrl.push("WishlistPage");
+    this.navCtrl.push(WishlistPage);
   }
 
 }

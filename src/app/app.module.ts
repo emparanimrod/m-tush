@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicStorageModule } from "@ionic/storage";
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
-// import { WOOCOMMERCE_CREDENTIALS } from "../models/woocommerce.credentials";
+import { OneSignal } from "@ionic-native/onesignal";
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { Menu } from '../pages/menu/menu';
@@ -29,6 +29,10 @@ import { ComponentsModule } from '../components/components.module';
 import { EditPasswordPage } from '../pages/edit-password/edit-password';
 import { OrderDetailsPage } from '../pages/order-details/order-details';
 import { AddressesPage } from '../pages/addresses/addresses';
+import { WishlistPage } from '../pages/wishlist/wishlist';
+import { SearchPage } from '../pages/search/search';
+import { OrderPlacedPage } from '../pages/order-placed/order-placed';
+import { MpesaPage } from '../pages/mpesa/mpesa';
 
 @NgModule({
   declarations: [
@@ -48,7 +52,11 @@ import { AddressesPage } from '../pages/addresses/addresses';
     BillingInfoPage,
     EditPasswordPage,
     OrderDetailsPage,
-    AddressesPage
+    AddressesPage,
+    WishlistPage,
+    SearchPage,
+    OrderPlacedPage,
+    MpesaPage
   ],
   imports: [
     BrowserModule,
@@ -79,11 +87,16 @@ import { AddressesPage } from '../pages/addresses/addresses';
     BillingInfoPage,
     EditPasswordPage,
     OrderDetailsPage,
-    AddressesPage
+    AddressesPage,
+    WishlistPage,
+    SearchPage,
+    OrderPlacedPage,
+    MpesaPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
+    OneSignal,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

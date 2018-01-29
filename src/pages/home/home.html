@@ -1,35 +1,25 @@
 <ion-header no-border>
 
-    <ion-navbar color="primary">
+    <ion-navbar color="primary" class="navi">
         <button ion-button menuToggle>
           <ion-icon name="menu"></ion-icon>
         </button>
         <ion-title>Home</ion-title>
         <ion-buttons end>
-          <button ion-button (click)="goToSearch()">
-            <ion-icon large name="search"></ion-icon>
-          </button>
-          <!-- <button ion-button>
-            <ion-icon name="qr-scanner"></ion-icon>
-          </button> -->
           <button ion-button (click)="openCart()">
             <ion-icon name="cart"></ion-icon>
           </button>
         </ion-buttons>
       </ion-navbar>
-
+      <ion-toolbar color="primary" class="tool">
+            <ion-searchbar [(ngModel)]="searchQuery" (search)="onSearch($event)" ></ion-searchbar>
+      </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <!-- Floating Action Button for Cart -->
-<!-- <ion-fab right bottom padding no-border (click)="openCart()">
-    <button ion-fab color="danger">
-      <ion-icon name="cart"></ion-icon>
-    </button>
-  </ion-fab> -->
+<ion-content no-padding>
 
   <ion-slides pager no-padding autoplay="4000" class="slider">
-              <ion-slide no-padding style="margin: 0px;  padding: 0px" *ngFor="let slide of slides">
+     <ion-slide no-padding style="margin: 0px;  padding: 0px" *ngFor="let slide of slides">
             <img class="slider-pic" no-padding src="{{ slide.src }}" alt="">
           </ion-slide>
       
@@ -39,7 +29,6 @@
   <!--list categories-->
   <ion-card>
       <ion-list class="cat-list">
-
         <ion-row>
           <ion-col col-3 class="cat-item" *ngFor="let category of categories | slice:0:3; let i = index" (click)="openCategoryPage(category)">
               <ion-thumbnail class="cat-image overlay">
@@ -61,14 +50,14 @@
 
     <ion-grid class="grid-no-padding deals">
         <ion-row>
-          <ion-col text-center>
+          <ion-col  col-6 text-center>
             <ion-card>
               <div>Flash Deals</div>
               <ion-badge color="primary">00:00:01</ion-badge>
               <img src="assets/img/items/item_1.jpg" alt="">
             </ion-card>
           </ion-col>
-          <ion-col text-center>
+          <ion-col col-6 text-center>
             <ion-card>
               <div>Super Deals</div>
               <ion-badge color="primary">Up to 90% off</ion-badge>
@@ -81,10 +70,26 @@
     
  <!--List of items-->
  <div class="price" text-center>Featured Products</div>
- <ion-grid class="list-cards">
+ <ion-grid class="prod-name">
+   <ion-row class="prod-name">
+     <ion-col class="prod-col" col-4 *ngFor="let product of products">
+        <ion-item (click)="openProductPage(product)">
+            <ion-fab right top no-border *ngIf="product.sale_price" >
+                <button ion-fab color="danger">
+                  <p> {{ ((product.regular_price-product.sale_price)/product.regular_price)*100 | number: '1.1-1' }}%off </p>
+                </button>
+              </ion-fab>
+          <img class="prod-img" src="{{ product.featured_src }}" alt="{{ product.title }}">
+          <h6 text-wrap class="prod-name" text-center [innerHTML]="product.title.substr(0, 8) + '...'"> </h6>
+          <h6 class="prod-name" text-center text-wrap>{{ product.price | currency:'KSH':true }} </h6>
+        </ion-item>
+     </ion-col>
+   </ion-row>
+ </ion-grid>
+ <!-- <ion-grid class="list-cards">
     <ion-row>
-      <ion-col *ngFor="let product of products" col-4 class="product" >
-        <div class="card light-bg new">
+      <ion-col *ngFor="let product of products" col-4 no-padding class="prod-col" >
+        <ion-card class="prod">
             <ion-fab right top no-border *ngIf="product.sale_price" (click)="openCart()">
                 <button ion-fab color="danger">
                   <p> {{ ((product.regular_price-product.sale_price)/product.regular_price)*100 | number: '1.1-1' }}%off </p>
@@ -95,32 +100,28 @@
               <ion-label color="bright"> {{ category }} </ion-label>
             </ion-chip>
           <h6 text-wrap class="prod-name" text-center (click)="openProductPage(product)"> {{product.title}} </h6>
-          <div class="price" text-center>{{ product.regular_price | currency:'KSH':true }} </div>
-        </div>
+          <div class="price" text-center>{{ product.price | currency:'KSH':true }} </div>
+        </ion-card>
       </ion-col>
     </ion-row>
-  </ion-grid>
+  </ion-grid> -->
 
-  <ion-grid class="list-cards">
-     <ion-row>
-       <ion-col *ngFor="let product of moreProducts" col-4 >
-         <div class="card light-bg">
-             <ion-fab right top no-border *ngIf="product.sale_price">
-                 <button ion-fab color="danger">
-                   <p text-wrap> {{ ((product.regular_price-product.sale_price)/product.regular_price)*100 | number: '1.1-1'}}%off </p>
-                 </button>
-               </ion-fab>
-           <img src="{{ product.featured_src }}" (click)="openProductPage(product)" alt="{{ product.title }}">
-           <ion-chip *ngFor="let category of product.categories | slice:0:2; let i = index" style="margin-left: 5px" >
-              <ion-label color="bright"> {{ category }} </ion-label>
-            </ion-chip>
-           <h6 text-wrap text-center (click)="openProductPage(product)"> {{product.title}} </h6>
-          <div class="price" text-center *ngIf="product.sale_price" > {{ product.sale_price | currency:'KSH':true }} </div>
-          <div class="price" text-center *ngIf="!product.sale_price" > {{ product.price | currency:'KSH':true }} </div>
-         </div>
-       </ion-col>
-     </ion-row>
-   </ion-grid>
+  <ion-grid class="prod-name">
+      <ion-row class="prod-name">
+        <ion-col class="prod-col" col-4 *ngFor="let product of moreProducts">
+           <ion-item (click)="openProductPage(product)">
+               <ion-fab right top no-border *ngIf="product.sale_price">
+                   <button ion-fab color="danger">
+                     <p> {{ ((product.regular_price-product.sale_price)/product.regular_price)*100 | number: '1.1-1' }}%off </p>
+                   </button>
+                 </ion-fab>
+             <img class="prod-img" src="{{ product.featured_src }}"  alt="{{ product.title }}">
+             <h6 text-wrap class="prod-name" text-center [innerHTML]="product.title.substr(0, 8) + '...'"> </h6>
+             <h6 class="prod-name" text-center text-wrap>{{ product.price | currency:'KSH':true }} </h6>
+           </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
 
   <!-- Unedited Slider -->
 

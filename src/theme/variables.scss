@@ -40,6 +40,7 @@ $colors: (
   light: #FFFFFF,
   dark: #222,
   favorite: #69BB7B,
+  mpesa: #10a802,
   facebook: #3B5999,
   googleplus: #DD4C39,
   bgColor: #EBEBEC,
@@ -70,6 +71,9 @@ $loading-md-max-width: 400px;
 $loading-md-max-height: 90%;
 $loading-md-padding-top: 24px;
 $segment-button-md-border-bottom-color: white;
+$searchbar-md-input-box-shadow: 0;
+$searchbar-md-input-border-radius: 20px;
+$searchbar-md-padding-top: 0;
 
 
 // App Windows Variables

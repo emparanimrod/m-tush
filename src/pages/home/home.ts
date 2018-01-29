@@ -6,6 +6,7 @@ import { CartPage } from '../cart/cart';
 import { ProductsByCategoryPage } from '../products-by-category/products-by-category';
 import { CategoriesPage } from '../categories/categories';
 import { WC_URL } from '../../models/appconfig';
+import { SearchPage } from '../search/search';
 // import { WC_URL } from "../../models/appconfig";
 
 @Component({
@@ -35,6 +36,7 @@ export class HomePage {
   moreProducts: any[];
   categories: any[];
   discount: any;
+  searchQuery: string = "";
   
  
   // @ViewChild('productslides') productSlides: Slides;
@@ -61,8 +63,6 @@ export class HomePage {
     spinner: 'bubbles',
     showBackdrop: false,
     cssClass: 'backdrop',
-    
-
     });
 loading.present();
 
@@ -71,6 +71,7 @@ loading.present();
     let temp: any[] = JSON.parse(data.body).product_categories;
 
     for( let i = 0; i < temp.length; i ++ ){
+
       if(temp[i].parent == 0){
         this.categories.push(temp[i]);
         loading.dismiss();
@@ -159,5 +160,11 @@ loading.present();
         this.navCtrl.push(CategoriesPage);
 
       }
+
+  onSearch(event){
+    if(this.searchQuery.length > 0){
+      this.navCtrl.push(SearchPage, {"searchQuery": this.searchQuery});
+    }
+  }
 
 }
